@@ -4,6 +4,7 @@ using Learun.Util;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 
@@ -38,7 +39,7 @@ namespace Learun.Application.TwoDevelopment.LR_CodeDemo
                 a.ProjectName,
                 t.ProjectId,
                 t.CustName,
-                pc.ContractNo,
+                t.ContractNo,
                 t.Amount,
                 t.ReceiptDate,
                 t.PaymentUnit,
@@ -51,15 +52,13 @@ namespace Learun.Application.TwoDevelopment.LR_CodeDemo
                 t.UpdateUser,
                 a.ProjectSource,
 a.CreateUser as BCreateUser,
-a.DepartmentId as BDepartmentId,py.PaymentAmount,pc.ContractAmount,pc.EffectiveAmount,lbu.F_RealName as FollowPersonName
-      
-               
+a.DepartmentId as BDepartmentId,py.PaymentAmount,pc.ContractAmount,pc.EffectiveAmount,lbu.F_RealName as FollowPersonName              
                 ");
                 // strSql.Append("  FROM ProjectPayCollection t inner join Project a on a.Id=t.ProjectId left join ProjectContract pc on pc.ProjectId=t.ProjectId");
                 //strSql.Append(" FROM ProjectPayCollection t inner join Project a on a.Id=t.ProjectId   left join ProjectContract pc on a.Id=pc.ProjectId and pc.MainContract=1 and pc.ContractType=1 and pc.ContractStatus<>7 and pc.ContractStatus<>6 and pc.ContractStatus=4");
                 strSql.Append(@"  FROM  ProjectPayCollection t inner join Project a on a.Id=t.ProjectId  
-left join (SELECT ContractStatus, ProjectId, ContractType, DepartmentId ,max(ContractNo) as ContractNo,max(EffectiveAmount) as EffectiveAmount, sum(ContractAmount) as ContractAmount FROM ProjectContract WHERE ContractStatus = 4 AND ContractType = 1 and MainContract = 1 group by ContractStatus, ProjectId, ContractType, DepartmentId) pc on a.Id=pc.ProjectId ");
-                strSql.Append("  left join (select SUM(PaymentAmount) as PaymentAmount,MAX(ProjectId) as ProjectId,MAX(PayType) as PayType from ProjectPayment where PayType<>3 group by ProjectId ) py on a.Id=py.ProjectId ");
+left join (SELECT ContractStatus, ProjectId, ContractType, DepartmentId , ContractNo, max(EffectiveAmount) as EffectiveAmount, sum(ContractAmount) as ContractAmount FROM ProjectContract WHERE ContractStatus = 4 AND ContractType = 1 and MainContract = 1 group by ContractStatus, ProjectId, ContractType, DepartmentId, ContractNo) pc on a.Id=pc.ProjectId ");
+                strSql.Append("  left join (select SUM(PaymentAmount) as PaymentAmount,MAX(ProjectId) as ProjectId,MAX(PayType) as PayType from ProjectPayment where PayType<>3 group by ProjectId ) py on a.Id=py.ProjectId AND t.ContractNo = pc.ContractNo  ");
                 strSql.Append("  left join adms706.dbo.lr_base_user lbu on lbu.F_UserId = a.FollowPerson ");
                 strSql.Append("  where pc.ProjectId is not null ");
                 var queryParam = queryJson.ToJObject();
@@ -75,8 +74,8 @@ left join (SELECT ContractStatus, ProjectId, ContractType, DepartmentId ,max(Con
                     //dp.Add("endTime", queryParam["EndTime"].ToDate(), DbType.DateTime);
                     strSql.Append(" AND ( t.ReceiptDate >= '" + start + "' AND t.ReceiptDate <= '" + end + "' ) ");
                     //strSql.Append(" AND ( t.ReceiptDate >= @startTime AND t.ReceiptDate <= @endTime ) ");
-                } 
-               
+                }
+
 
                 //}
                 //    else
@@ -101,7 +100,9 @@ left join (SELECT ContractStatus, ProjectId, ContractType, DepartmentId ,max(Con
                 }
                 if (!queryParam["ContractNo"].IsEmpty())
                 {
-                    strSql.Append(string.Format(" AND ( pc.ContractNo like '%{0}%' )", queryParam["ContractNo"].ToString()));
+                    // repair
+                    strSql.Append(string.Format(" AND ( pc.ContractNo = '{0}' )", queryParam["ContractNo"].ToString()));
+                    strSql.Append(string.Format(" AND ( t.ContractNo = '{0}' )", queryParam["ContractNo"].ToString()));
                 }
                 if (!queryParam["ProjectName"].IsEmpty())
                 {
@@ -127,7 +128,27 @@ left join (SELECT ContractStatus, ProjectId, ContractType, DepartmentId ,max(Con
                 {
                     strSql.Append(string.Format(" AND ( pc.DepartmentId like'%{0}%')", queryParam["DepartmentId"].ToString()));
                 }
-                return this.BaseRepository("learunOAWFForm").FindList<ProjectPayCollectionVo>(strSql.ToString(), dp, pagination);
+
+                //Debug.Write("-----------Page-----------");
+                //Debug.WriteLine(strSql);
+
+                var result = this.BaseRepository("learunOAWFForm").FindList<ProjectPayCollectionVo>(strSql.ToString(), dp, pagination);
+
+                //var resultList = result.ToList();
+                //Debug.WriteLine($"-----------查询结果条数：{resultList.Count}-----------");
+
+                //if (resultList.Count > 0)
+                //{
+                //    for (int i = 0; i < resultList.Count; i++)
+                //    {
+                //        var item = resultList[i];
+                //        Debug.WriteLine($"第{i + 1}条数据：ProjectName={item.ProjectName}, Amount={item.Amount}, CreateUser={item.CreateUser}");
+                //    }
+                //}
+
+                //Debug.WriteLine(result);
+
+                return result;
             }
             catch (Exception ex)
             {
@@ -140,7 +161,7 @@ left join (SELECT ContractStatus, ProjectId, ContractType, DepartmentId ,max(Con
                     throw ExceptionEx.ThrowServiceException(ex);
                 }
             }
-        } 
+        }
         /// <summary>
         /// 多部门获取页面显示列表数据
         /// </summary>
