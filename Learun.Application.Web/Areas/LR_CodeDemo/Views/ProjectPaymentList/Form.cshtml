@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "合同支付";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">项目名称<font face="宋体">*</font></div>
+        <textarea id="ProjectName" checkexpession="NotNull" class="form-control" isvalid="yes"  data-table="ProjectPayment" readonly></textarea>
+    </div>
+    @* <div class="col-xs-12 lr-form-item" id="CreateTime1" data-table="ProjectPayment" style="display:none">
+            <div class="lr-form-item-title">创建时间</div>
+            <input id="CreateTime" type="text" class="form-control" />
+        </div>
+        <div class="col-xs-12 lr-form-item" id="CreateUser1" data-table="ProjectPayment" style="display:none">
+            <div class="lr-form-item-title">创建人</div>
+            <input id="CreateUser" type="text" class="form-control" />
+        </div>*@
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">付款类型  <font face="宋体">*</font></div>
+        <div id="PayType" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">收款单位名称<font face="宋体">*</font></div>
+        <input id="Payee" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">收款银行<font face="宋体">*</font></div>
+        <input id="PayeeBank" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">银行账号<font face="宋体">*</font></div>
+        <input id="BankAccount" type="text" class="form-control" isvalid="yes" checkexpession="NotNull">
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">支付金额<font face="宋体">*</font></div>
+        <input id="PaymentAmount" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">总计支付<font face="宋体">*</font></div>
+        <input id="PaymentAmountsum" type="number" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">付款方式 <font face="宋体">*</font></div>
+        <div id="PaymentMethod" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">我司支付<font face="宋体">*</font></div>
+        <div id="PaymentHeader" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">外付事由<font face="宋体">*</font></div>
+        <textarea id="PaymentReason" class="form-control" style="height:100px;" isvalid="yes" checkexpession="NotNull"></textarea>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">附件上传<font face="宋体">*</font></div>
+        <div id="PaymentFile" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectPaymentList/Form.js")

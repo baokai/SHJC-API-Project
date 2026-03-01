@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "项目回款管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+        <div class="lr-form-item-title">项目名称</div>
+        <input id="ProjectName" checkexpession="NotNull" class="form-control" isvalid="yes" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+        <div class="lr-form-item-title">委托单位</div>
+        <input id="CustName" type="text" class="form-control" checkexpession="NotNull" isvalid="yes" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+        <div class="lr-form-item-title">合同编号</div>
+        <input id="ContractNo" type="text" class="form-control" checkexpession="NotNull" isvalid="yes" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+        <div class="lr-form-item-title">本次到款金额</div>
+        <input id="Amount" type="text" class="form-control" checkexpession="NotNull" isvalid="yes" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+        <div class="lr-form-item-title">到账日期</div>
+        <input id="ReceiptDate" type="text" class="form-control lr-input-wdatepicker" checkexpession="NotNull" isvalid="yes" readonly />
+        
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+        <div class="lr-form-item-title">到款单位</div>
+        <input id="PaymentUnit" type="text" class="form-control" checkexpession="NotNull" isvalid="yes" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+        <div class="lr-form-item-title">营销部门</div>
+        <input id="DepartmentId" checkexpession="NotNull" isvalid="yes" class="form-control" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+    <div class="lr-form-item-title">项目来源</div>
+    <input id="ProjectSource" checkexpession="NotNull" isvalid="yes" class="form-control" readonly/>
+</div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectPayCollection/PreviewForm.js")

@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "用工申请";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">项目名称</div>
+        <input id="ProjectName" class="form-control" isvalid="yes" checkexpession="NotNull" /> @*<div id="ProjectId" isvalid="yes" checkexpession="NotNull"></div>*@
+    </div>
+    @*<div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+            <div class="lr-form-item-title">合同编号</div>
+            <input id="ContractNo" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+        </div>*@
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">申请人<font face="宋体">*</font></div>
+        <input id="ApplyPersonName"  class="form-control" isvalid="yes" checkexpession="NotNull" />  @*<div id="ApplyPerson" isvalid="yes" checkexpession="NotNull"></div>*@
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">用工资源<font face="宋体">*</font></div>
+        <input id="WageSource" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">作业类型</div>
+        <input id="JobType" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">现场用工日期<font face="宋体">*</font></div>
+        <input id="WorkingTime" type="text" class="form-control lr-input-wdatepicker" checkexpession="NotNull" isvalid="yes" onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd',onpicked: function () { $('#ApproachTime').trigger('change'); } })" />  
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">人数<font face="宋体">*</font></div>
+        <input id="PersonQty" type="text" class="form-control" isvalid="yes" checkexpession="Num" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">用工单价</div>
+        <input id="Price" type="text" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">总金额</div>
+        <input id="Amount" type="number" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">收款人/单位</div>
+        <input id="PayeeUnit" type="text" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">收款银行</div>
+        <input id="PayeeBank" type="text" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">银行账号</div>
+        <input id="PayeeAccount" type="text" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">付款方式</div>
+        <div id="PaymentMethod"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectRecruit">
+        <div class="lr-form-item-title">备注</div>
+        <textarea id="Remark" class="form-control" style="height:100px;"></textarea>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectRecruit/Formliuchen.js")

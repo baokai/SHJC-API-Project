@@ -1,0 +1,119 @@
+﻿@{ ViewBag.Title = "营销报表";
+                Layout = "~/Views/Shared/_Index.cshtml"; }
+<div class="lr-layout ">
+    <div class="lr-layout-center">
+        <div class="lr-layout-wrap lr-layout-wrap-notitle ">
+            <div class="lr-layout-tool">
+                <div class="lr-layout-tool-left">
+                    <div class="lr-layout-tool-item">
+                        <div id="datesearch"></div>
+                    </div>
+                    <div class="lr-layout-tool-item">
+                        <input id="txt_Keyword" type="text" class="form-control" placeholder="请输入编号/名称" />
+                    </div>
+                    <div class="lr-layout-tool-item">
+                        <a id="btn_Search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;<span class="lrlg">查询</span></a>
+                    </div>
+                    <div class="lr-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="lr-query-formcontent">
+                                <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+                                    <div class="lr-form-item-title">审核通过时间<font face="宋体">*</font></div>
+                                    <input id="ApproverTime" type="text" class="form-control lr-input-wdatepicker" isvalid="yes" onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd',onpicked: function () { $('#ApproachTime').trigger('change'); } })" />
+                                </div>
+                                <div class="col-xs-12 lr-form-item">
+                                    <div class="lr-form-item-title">合同编号</div>
+                                    <input id="ContractNo" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+                                    <div class="lr-form-item-title">项目名称<font face="宋体">*</font></div>
+                                    <div id="ProjectId" checkexpession="NotNull" isvalid="yes"></div>
+                                </div>
+                                <div class="col-xs-12 lr-form-item">
+                                    <div class="lr-form-item-title">委托单位</div>
+                                    <input id="CustName" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+                                    <div class="lr-form-item-title">合同主体<font face="宋体">*</font></div>
+                                    <div id="ContractSubject" checkexpession="NotNull" isvalid="yes"></div>
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="Project">
+                                    <div class="lr-form-item-title">项目来源</div>
+                                    <div id="ProjectSource" readonly></div>
+                                </div>
+                                <div class="col-xs-12 lr-form-item">
+                                    <div class="lr-form-item-title">合同金额</div>
+                                    <input id="ContractAmount" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 lr-form-item">
+                                    <div class="lr-form-item-title">合同状态</div>
+                                    <div id="ContractStatus"></div>
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+                                    <div class="lr-form-item-title">营销部门<font face="宋体">*</font></div>
+                                    <div id="Y_DepartmentId" checkexpession="NotNull" isvalid="yes"></div>
+                                </div>
+                                <div class="col-xs-12 lr-form-item">
+                                    <div class="lr-form-item-title">已到金额</div>
+                                    <input id="Amount" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+                                    <div class="lr-form-item-title">到账日期<font face="宋体">*</font></div>
+                                    <input id="ReceiptDate" type="text" class="form-control lr-input-wdatepicker" checkexpession="NotNull" isvalid="yes" " onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd',onpicked: function () { $('#ReceiptDate').trigger('change'); } })" />
+                                </div>
+                                <div class="col-xs-12 lr-form-item">
+                                    <div class="lr-form-item-title">支付金额</div>
+                                    <input id="PaymentAmount" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+                                    <div class="lr-form-item-title">实施部门<font face="宋体">*</font></div>
+                                    <div id="S_DepartmentId" checkexpession="NotNull" isvalid="yes"></div>
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+                                    <div class="lr-form-item-title">检测日期<font face="宋体">*</font></div>
+                                    <input id="ApproachTime" type="text" class="form-control lr-input-wdatepicker" checkexpession="NotNull" isvalid="yes" " onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd',onpicked: function () { $('#ReceiptDate').trigger('change'); } })" />
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+                                    <div class="lr-form-item-title">报告主体<font face="宋体">*</font></div>
+                                    <div id="ReportSubject" checkexpession="NotNull" isvalid="yes"></div>
+                                </div>
+                                <div class="col-xs-12 lr-form-item">
+                                    <div class="lr-form-item-title">报告状态</div>
+                                    <div id="TaskStatus"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lr-layout-tool-right">
+
+                    <div class=" btn-group btn-group-sm" learun-authorize="yes">
+                        <a id="lr-replace" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;<span class="lrlg">刷新</span></a>
+                        <a id="lr-print" class="btn btn-default"><i class="fa fa-print"></i>&nbsp;<span class="lrlg">打印</span></a>
+                        <a id="lr-export" class="btn btn-default"><i class="fa fa-sign-out"></i>&nbsp;<span class="lrlg">导出</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="lr-layout-body" id="gridtable"></div>
+            <div class=" btn-group btn-group-sm" style="display:flex;flex-direction:row;margin-bottom:10px">
+                <span style="margin-right:10px;margin-left:10px">合同金额：</span>
+                <input id="ContractAmountSum" type="text" class="form-control" readonly style="width:260px" />
+                <span style="margin-right: 10px; margin-left: 10px">已到金额：</span>
+                <input id="AmountSum" type="text" class="form-control" style="width:260px" readonly />
+                <span style="margin-right: 10px; margin-left: 10px">未收账款：</span>
+                <input id="NotReceivedSum" type="text" class="form-control" style="width:260px" readonly />
+            </div>
+            <div class=" btn-group btn-group-sm" style="display:flex;flex-direction:row">
+                <span style="margin-right: 10px; margin-left: 10px">自主营销：</span>
+                <input id="OwnSum" type="text" class="form-control" style="width:260px" readonly />
+                <span style="margin-right: 10px; margin-left: 10px ">渠道营销：</span>
+                <input id="DitchSum" type="text" class="form-control" style="width:260px" readonly />
+                <span style="margin-right: 10px; margin-left: 10px">合作伙伴：</span>
+                <input id="ConsociationSum" type="text" class="form-control" style="width:260px" readonly />
+            </div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ReportForms/MarketingReportForms.js")
+
+

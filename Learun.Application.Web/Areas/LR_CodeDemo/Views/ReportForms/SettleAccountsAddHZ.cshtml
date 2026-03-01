@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "项目管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">比例(小数)<font face="宋体">*</font></div>
+        <input id="Proportion" type="text" class="form-control" checkexpession="NotNull" isvalid="yes" />
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ReportForms/SettleAccountsAddHZ.js")

@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "项目任务单";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">项目名称</div>
+        <div id="ProjectId"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">报告编号<font face="宋体">*</font></div>
+        <input id="ProjectTaskNo" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">现场联系人</div>
+        <input id="SiteContact" type="text" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">现场联系电话</div>
+        <input id="SitePhone" type="text" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">项目负责人</div>
+        <div id="ProjectResponsible"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">检测员</div>
+        <div id="Inspector"></div>
+    </div>
+    <div class="col-xs-6 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">主部门</div>
+        <div id="MainDepartmentId"></div>
+    </div>
+    <div class="col-xs-6 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">主部门金额</div>
+        <input id="MainAmount" type="number" class="form-control" />
+    </div>
+    <div class="col-xs-6 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">次部门</div>
+        <div id="SubDepartmentId"></div>
+    </div>
+    <div class="col-xs-6 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">次部门金额</div>
+        <input id="SubAmount" type="number" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">进场时间</div>
+        <input id="ApproachTime" type="text" class="form-control lr-input-wdatepicker" onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd',onpicked: function () { $('#ApproachTime').trigger('change'); } })" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">报告计划时间</div>
+        <input id="PlanTime" type="text" class="form-control lr-input-wdatepicker" onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd',onpicked: function () { $('#PlanTime').trigger('change'); } })" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">检测内容</div>
+        <textarea id="TestContent" class="form-control" style="height:100px;"></textarea>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">真实检测目的</div>
+        <textarea id="TestTarget" class="form-control" style="height:100px;"></textarea>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">备注</div>
+        <textarea id="Remark" class="form-control" style="height:50px;"></textarea>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">报告审核人</div>
+        <div id="ReportApprover" checkexpession="NotNull" isvalid="yes"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">报告主体</div>
+        <div id="ReportSubject" checkexpession="NotNull" isvalid="yes"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">评级</div>
+        <div id="Rating" class="form-control"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+        <div class="lr-form-item-title">附件上传</div>
+        <div id="ReportFile" checkexpession="NotNull"></div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectTask/ReportFormHZ.js")

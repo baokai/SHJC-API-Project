@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "项目管理";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<link href="~/Content/signet/jquery.zsign.css" rel="stylesheet" />
+<script src="~/Content/signet/jquery.zsign.js"></script>
+<div class="lr-layout ">
+    <div class="lr-layout-center">
+        <div class="lr-layout-wrap lr-layout-wrap-notitle ">
+            <div class="lr-layout-tool">
+                <div class="lr-layout-tool-left">
+                    <div class="lr-layout-tool-item">
+                        <div id="datesearch"></div>
+                    </div>
+                    <div class="lr-layout-tool-item">
+                        <input id="txt_Keyword" type="text" class="form-control" placeholder="请输入编号/名称" />
+                    </div>
+                    <div class="lr-layout-tool-item">
+                        <a id="btn_Search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;<span class="lrlg">查询</span></a>
+                    </div>
+                    <div class="lr-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="lr-query-formcontent">
+                                <div class="col-xs-12 lr-form-item">
+                                    <div class="lr-form-item-title">项目编号</div>
+                                    <input id="ProjectCode" type="text" class="form-control" />
+                                </div>
+                                <div class="col-xs-12 lr-form-item">
+                                    <div class="lr-form-item-title">项目名称</div>
+                                    <input id="ProjectName" type="text" class="form-control"></input>
+                                </div>
+                                <div class="col-xs-12 lr-form-item">
+                                    <div class="lr-form-item-title">委托单位</div>
+                                    <input id="CustName" type="text" class="form-control"></input>
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="Project">
+                                    <div class="lr-form-item-title">报备人<font face="宋体">*</font></div>
+                                    <div id="PreparedPerson" checkexpession="NotNull" isvalid="yes"></div>
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="Project">
+                                    <div class="lr-form-item-title">跟进人<font face="宋体">*</font></div>
+                                    <div id="FollowPerson" checkexpession="NotNull" isvalid="yes"></div>
+                                </div>
+                                <div class="col-xs-12 lr-form-item" data-table="Project">
+                                    <div class="lr-form-item-title">项目状态<font face="宋体">*</font></div>
+                                    <div id="ProjectStatus" checkexpession="NotNull" isvalid="yes"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lr-layout-tool-right">
+                    <div class=" btn-group btn-group-sm">
+                        <a id="lr_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class=" btn-group btn-group-sm" learun-authorize="yes">
+                        <a id="lr_view" class="btn btn-default"><i class="fa fa-pencil-square-o"></i>&nbsp;查看</a>
+                    </div>
+                    @* <div class=" btn-group btn-group-sm" learun-authorize="yes">
+                            <a id="lr_preview" class="btn btn-default">预览</a>
+                        </div>*@
+                </div>
+            </div>
+            <div class="lr-layout-body" id="gridtable"></div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectManage/PreviewIndex.js")

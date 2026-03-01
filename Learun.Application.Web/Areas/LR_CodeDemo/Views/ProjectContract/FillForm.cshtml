@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "项目合同申请";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">项目名称<font face="宋体">*</font></div>
+        <div id="ProjectId" checkexpession="NotNull" isvalid="yes" style="pointer-events:none"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract" ">
+        <div class="lr-form-item-title">委托单位</div>
+        <input id="CustName" type="text" class="form-control" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">项目来源</div>
+        <div id="ProjectSource" style="pointer-events:none"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">营销部门<font face="宋体">*</font></div>
+        <div id="DepartmentId" checkexpession="NotNull" isvalid="yes"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">营销人员</div>
+        <div id="FollowPerson"></div>
+    </div>
+    <div class="col-xs-6 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">主部门</div>
+        <div id="MainDepartmentId"></div>
+    </div>
+    <div class="col-xs-6 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">主部门金额</div>
+        <input id="MainAmount" type="number" class="form-control" />
+    </div>
+    <div class="col-xs-6 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">次部门</div>
+        <div id="SubDepartmentId"></div>
+    </div>
+    <div class="col-xs-6 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">次部门金额</div>
+        <input id="SubAmount" type="number" class="form-control" />
+    </div>
+    <div class="col-xs-6 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">合同编号<font face="宋体">*</font></div>
+        <input id="ContractNo" type="text" class="form-control" checkexpession="NotNull" isvalid="yes" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">合同主体<font face="宋体">*</font></div>
+        <div id="ContractSubject" checkexpession="NotNull" isvalid="yes" style="pointer-events:none"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">合同金额<font face="宋体">*</font></div>
+        <input id="ContractAmount" type="number" class="form-control" checkexpession="NotNull" isvalid="yes" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">有效合同额<font face="宋体">*</font></div>
+        <input id="EffectiveAmount" type="number" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">合同分类<font face="宋体">*</font></div>
+        <div id="ContractType" checkexpession="NotNull" isvalid="yes" style="pointer-events:none"></div>
+    </div>
+    @*<div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+            <div class="lr-form-item-title">合同类型<font face="宋体">*</font></div>
+            <div id="MasterContract" checkexpession="NotNull" isvalid="yes"></div>
+        </div>*@
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">备注</div>
+        <textarea id="ContractRemark" class="form-control" style="height:50px;"></textarea>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">附件上传<font face="宋体">*</font></div>
+        <div id="ContractFile" checkexpession="NotNull" isvalid="yes"></div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectContract/FillForm.js")

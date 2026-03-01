@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "账号添加";
+    Layout = "~/Views/Shared/_Form.cshtml";
+
+}
+<div class="lr-form-wrap" id="form">
+
+    <div class=" btn-group btn-group-sm">
+        <a id="lr_deleteDepartmentNameList" class="btn btn-circle"><i class="fa fa-yelp"></i>&nbsp;<span class="lrlg">确定清除多部门</span></a>
+    </div>
+    <div class="col-xs-12 lr-form-item">
+        <div class="lr-form-item-title">备注</div>
+        <textarea id="F_MoreDepartmentName" class="form-control" style="height:100px;"></textarea>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_OrganizationModule/Views/User/DepartmentIdForm.js")

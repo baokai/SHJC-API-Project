@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "项目开票";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+    <div class="col-xs-12 lr-form-item" data-table="ProjectBilling">
+        <div class="lr-form-item-title">项目名称</div>
+        <input id="ProjectName" type="text" class="form-control" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectBilling" id="ProjectSourceId">
+        <div class="lr-form-item-title">项目来源</div>
+        <input id="ProjectSourceName" class="form-control" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectBilling">
+        <div class="lr-form-item-title">开票类</div>
+        <input id="BillingTypeName" class="form-control" readonly />
+    </div>
+
+    <div class="col-xs-12 lr-form-item" data-table="ProjectBilling">
+        <div class="lr-form-item-title">开票金额</div>
+        <input id="BillingAmount" class="form-control" readonly />
+    </div>
+
+    <div class="col-xs-12 lr-form-item" data-table="ProjectBilling">
+        <div class="lr-form-item-title">开票内容</div>
+        <input id="BillingContentName" class="form-control" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectBilling">
+        <div class="lr-form-item-title">开票信息</div>
+        <textarea id="BillingInformation" class="form-control" type="text" readonly style="height:100px"></textarea>
+    </div>
+
+    <div class="col-xs-12 lr-form-item" data-table="ProjectBilling">
+        <div class="lr-form-item-title">开票单位</div>
+        <input id="BillingUnitName" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectBilling">
+        <div class="lr-form-item-title">发票备注</div>
+        <textarea id="Remark" class="form-control" type="text" readonly></textarea>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectBilling">
+        <div class="lr-form-item-title">备注</div>
+        <textarea id="B_Remark" class="form-control" style="height:100px;"></textarea>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectBilling" id="ReportFileId">
+        <div class="lr-form-item-title">附件上传</div>
+        <div id="ReportFile"></div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectBilling/FormId.js")

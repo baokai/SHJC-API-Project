@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "账号调岗";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+    <input id="F_CompanyId" type="hidden" />
+    <div class="col-xs-6 lr-form-item">
+        <div class="lr-form-item-title">账号<font face="宋体"></font></div>
+        <input id="F_Account" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 lr-form-item">
+        <div class="lr-form-item-title">姓名<font face="宋体"></font></div>
+        <input id="F_RealName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-6 lr-form-item">
+        <div class="lr-form-item-title">当前部门<font face="宋体">*</font></div>
+        <div id="F_DepartmentId" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-6 lr-form-item">
+        <div class="lr-form-item-title">调岗部门<font face="宋体">*</font></div>
+        <div id="P_F_DepartmentId" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">新负责人<font face="宋体">*</font></div>
+        <div id="N_FollowPerson" checkexpession="NotNull" isvalid="yes"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item">
+        <input type="checkbox" name="dataList" value="Project" />项目报备
+        <input type="checkbox" name="dataList" value="ProjectTask" />项目任务管理
+        <input type="checkbox" name="dataList" value="ProjectRecruit" />用工申请
+    </div>
+    <input id="F_UserId" type="hidden"/>
+</div>
+@Html.AppendJsFile("/Areas/LR_OrganizationModule/Views/User/Post_MobilizationForm.js")

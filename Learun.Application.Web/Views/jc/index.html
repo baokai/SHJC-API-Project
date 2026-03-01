@@ -1,0 +1,1397 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>钧测数据统计</title>
+<!--设置是否为缩放模式 -->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 新 Bootstrap 核心 CSS 文件 --> 
+<link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.css">
+<!-- vue --> 
+<script src="js/vue.js"></script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 --> 
+<script src="js/jquery.min.js"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 --> 
+<script src="js/bootstrap.min.js"></script>
+<!--echarts JS-->
+<script src="js/echarts.min.js"></script>
+<script src="js/china.js"></script>
+<!-- 轮播swiper文件 -->
+<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+<script src="js/swiper.min.js"></script>
+<!--界面样式-->
+<!-- <script src="js/visual.js"></script> -->
+
+<script src="js/chartMap.js"></script>
+<link rel="stylesheet" type="text/css" href="css/visual.css">
+</head>
+<body class="ksh">
+	<div id="load">
+		<div class="load_img"><!-- 加载动画 -->
+			<img class="jzxz1" src="images/jzxz1.png">
+			<img class="jzxz2" src="images/jzxz2.png">
+		</div>
+	</div>
+	<div class="head_top">
+		<!-- <img class="img-responsive" src="images/jcdsj_logo.gif"> -->
+	</div>
+	<div class="visual"> 
+		<div class="visual_left">
+			<div class="visual_box" id="vue1">
+				<div class="visual_title">
+					<span>月项目金额</span>
+					<img src="images/ksh33.png">
+				</div>
+				<div class="visual_chart" id="main1"></div>
+			</div>
+			<div class="visual_box" id="vue2">
+				<div class="visual_title">
+					<span>周转化率</span>
+					<img src="images/ksh33.png">
+				</div>
+				<div class="visual_chart" id="main2"></div>
+			</div>
+			<div class="visual_box" id="vue3">
+				<div class="visual_title">
+					<span>项目回款率</span>
+					<img src="images/ksh33.png">
+				</div>
+				<div class="visual_chart sfzcll">
+					<a>部门</a>
+					<a>合同金额</a>
+					<a>回款金额</a>
+					<a>回款率</a>
+					<div class="sfzcll_pos_box">
+						<div class="sfzcll_box" v-for="item in datas">
+							<img class="sfzcll_bkJk" src="images/ksh34.png">
+							<img class="sfzcll_bkJk" src="images/ksh34.png">
+							<img class="sfzcll_bkJk" src="images/ksh34.png">
+							<img class="sfzcll_bkJk" src="images/ksh34.png">
+							<!-- <label><img src="images/ksh35.png">审批</label> -->
+							<div class="sfzcll_smallBk">
+								<div class="ygl">
+									<span>{{item.DepartmentName}}</span>
+								</div>
+							</div>
+							<div class="sfzcll_smallBk">
+								<div class="ygl">
+									<span>{{item.ContractAmount}}</span>
+								</div>
+							</div>
+							<div class="sfzcll_smallBk">
+								<div class="ygh">
+									<span>{{item.CollectionAmount}}</span>
+								</div>
+							</div>
+							<div class="sfzcll_smallBk">
+								<div class="ygl">
+									<span>{{item.CollectionRate}}%</span>
+								</div>
+							</div>
+							<!-- <div class="clear"></div> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="visual_con">
+			<div class="visual_conTop" id="vue4">
+				<div class="visual_conTop_box visual_conTop1">
+					<div>
+						<h3>项目总数</h3>
+						<p class="mar_left">{{mark4}}</p>
+					</div>
+				</div>
+				<div class="visual_conTop_box visual_conTop2">
+					<div>
+						<h3>自主营销</h3>
+						<p class="mar_left">{{mark1}}</p>
+					</div>
+				</div>
+				<div class="visual_conTop_box visual_conTop2">
+					<div>
+						<h3>渠道营销</h3>
+						<p class="mar_left">{{mark2}}</p>
+					</div>
+				</div>
+				<div class="visual_conTop_box visual_conTop2">
+					<div>
+						<h3>合作伙伴</h3>
+						<p class="mar_left">{{mark3}}</p>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="visual_conBot" id="vue5">
+				<img class="visual_conBot_l" src="images/ksh42.png">
+				<img class="visual_conBot_2" src="images/ksh43.png">
+				<img class="visual_conBot_3" src="images/ksh44.png">
+				<img class="visual_conBot_4" src="images/ksh45.png">
+				<div class="visual_chart_text">
+					<h1>营销+大数据</h1>
+					<h2>钧测营销大数据分析平台</h2>
+				</div>
+				<div class="visual_chart" id="main8"></div>
+				<!-- <div class="visual_conBot_bot" id="vue51">
+					<div class="visualSssf_left">
+						<h3>今日实时成交额：123</h3>
+						<a style="display:block" class="active">全部数据</a>
+						<a v-for="item in datas_x_1">{{item}}</a>
+					</div>
+					<div class="visualSssf_right">
+						<div class="visualSssf_right_box" id="main5"></div>
+						<div class="visualSssf_right_box" id="main6"></div>
+						<div class="visualSssf_right_box" id="main7"></div>
+					</div>
+					<div class="clear"></div>
+				</div> -->
+			</div>
+		</div>
+		<div class="visual_right">
+			<div class="visual_box" id="vue5">
+				<div class="visual_title">
+					<span>项目分布</span>
+					<img src="images/ksh33.png">
+				</div>
+				<div class="swiper-container visual_swiper1 visual_chart">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"  id="main3"></div>
+						<div class="swiper-slide"  id="main31"></div>
+					</div>
+				</div>
+			</div>
+			<div class="visual_box visualSfzsfl" id="vue5">
+				<div class="visual_title">
+					<span>区域项目分布</span>
+					<img src="images/ksh33.png">
+				</div>
+				<div class="visual_chart" id="main9">
+					
+				</div>
+			</div>
+			<div class="visual_box" id="vue9">
+				<div class="visual_title">
+					<a :class="{on:yx == true}" @click="yxpm" >营销龙虎榜</a>
+					<!-- <a :class="{on:sc == true}" @click="scpm">生产</a> -->
+					<img src="images/ksh33.png">
+				</div>
+				<div class="swiper-container visual_swiper2 visual_chart">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide"  id="main4"></div>
+						<div class="swiper-slide"  id="main41"></div>
+					</div>
+				</div>
+				<!-- <div class=" visual_chart2" :class="{}">
+					<div class="swiper-wrapper">
+						<div style="width: 100%;height: 100%;" id="main42"></div>
+						<div class="swiper-slide"  id="main43"></div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<script>
+		$(function(){
+			var a=$('.visualSssf_left a')
+			for(var i=0;i<a.length;i++){
+				a[i].index=i;
+				a[i].onclick=function(){
+					for(var i=0;i<a.length;i++){
+						a[i].className=''
+						}
+					this.className='active'
+				}
+			}
+
+			var sfzcllH=$('.sfzcll_box').height()
+			var sfzcllHtwo=sfzcllH-2
+			$('.sfzcll_box').css('line-height',sfzcllH+'px')
+			$('.sfzcll_smallBk>div').css('line-height',sfzcllHtwo+'px')
+
+			//删除加载动画
+			$('#load').fadeOut(1000)
+			setTimeout(function(){    
+				$('#load').remove()
+			}
+			,1100);
+		})
+	</script>
+	<script>
+		var root = 'https://app.huolimeng.com.cn/learun/adms/LR_CodeDemo/Project/'
+		// new Vue({
+		// 	el:'#xxx',
+		// 	data:{
+
+		// 	},
+		// 	created(){
+
+		// 	},
+		// 	methods:{
+
+		// 	}
+		// })
+		new Vue({
+			el:'#vue1',
+			data:{
+				main1_x:[],
+				main1_y_0:[],
+				main1_y_1:[],
+				main1_y_2:[]
+			},
+			created(){
+				
+				this.get_data1()
+			},
+			mounted() {
+				
+			},
+			methods:{
+				
+				get_data1(){
+					$.ajax({
+						url: root + 'getProjectMonthCount',
+						type: 'GET',
+						data: {},
+						success: function(res){
+							let datas = res.data
+							// console.log(datas)
+							// 获取x轴的数据
+							let main1_x_1 = datas.map((e,i)=>{
+								return e.ProjectMonth 
+							});
+							let set = new Set(main1_x_1)
+							this.main1_x = Array.from(set)
+							// console.log(this.main1_x)
+							for(let i = 0;i<datas.length;i++){
+								// 获取询盘（状态是0）的数组
+								if(datas[i].ProjectStatus==0){
+									let a = datas[i].ProjectCount
+									if(this.main1_y_0 === undefined){
+										this.main1_y_0 = []
+									}
+									this.main1_y_0.push(a)
+								}
+								// 获取赢单（状态是1）的数组
+								if(datas[i].ProjectStatus==1){
+									let a = datas[i].ProjectCount
+									if(this.main1_y_1 === undefined){
+										this.main1_y_1 = []
+									}
+									this.main1_y_1.push(a)
+								}
+								// 获取丢单（状态是2）的数组
+								if(datas[i].ProjectStatus==2){
+									let a = datas[i].ProjectCount
+									if(this.main1_y_2 === undefined){
+										this.main1_y_2 = []
+									}
+									this.main1_y_2.push(a)
+								}
+							}
+							// console.log(this.main1_y_0)
+							// console.log(this.main1_y_1)
+							// console.log(this.main1_y_2)
+							var myChart1 = echarts.init(document.getElementById('main1'));
+					var data = {
+						id: 'multipleBarsLines',
+						legendBar: ['询盘', '赢单','丢单'],
+						symbol: ' ', //数值是否带百分号        --默认为空 ''
+						xAxis: this.main1_x,
+						yAxis: [
+							this.main1_y_0,
+							this.main1_y_1,
+							this.main1_y_2
+						],
+						barColor: ['#009883', '#0066CC','#FF6666'], //柱子颜色 必填参数
+					}
+					var myData = (function test() {
+						let yAxis = data.yAxis || []
+						
+						// let lines = data.lines || []
+						let legendBar = data.legendBar || []
+						let legendLine = data.legendLine || []
+						var symbol = data.symbol || ' '
+						let seriesArr = []
+						let legendArr = []
+						yAxis && yAxis.forEach((item, index) => {
+							legendArr.push({
+								name: legendBar && legendBar.length > 0 && legendBar[index]
+							})
+							seriesArr.push({
+								name: legendBar && legendBar.length > 0 && legendBar[index],
+								type: 'bar',
+								barGap: '0.5px',
+								data: item,
+								barWidth: data.barWidth || 12,
+								label: {
+									normal: {
+										show: false,
+										formatter: '{c}' + symbol,
+										position: 'top',
+										textStyle: {
+											color: '#000',
+											fontStyle: 'normal',
+											fontFamily: '微软雅黑',
+											textAlign: 'left',
+											fontSize: 11,
+										},
+									},
+								},
+								itemStyle: { //图形样式
+									normal: {
+										barBorderRadius:0,
+										borderWidth:1,
+										borderColor:'#ddd',
+										color: data.barColor[index]
+									},
+								}
+							})
+						})
+						return {
+							seriesArr,
+							legendArr
+						}
+					})()
+					option1 = {
+						title: {
+							show: true,
+							text: data.title,
+							subtext: data.subTitle,
+							link: '1111'
+						},
+						tooltip: {
+							trigger: 'axis',
+							formatter: function(params) {
+								var time = '';
+								var str = '';
+								for (var i of params) {
+									time = i.name.replace(/\n/g, '') + '<br/>';
+									if (i.data == 'null' || i.data == null) {
+										str += i.seriesName + '：无数据' + '<br/>'
+									} else {
+										str += i.seriesName + '：' + i.data
+									}
+								}
+								return time + str;
+							},
+							axisPointer: {
+								type: 'none'
+							},
+						},
+						legend: {
+							right: data.legendRight || '30%',
+							top: 0,
+							right:10,
+							itemGap: 16,
+							itemWidth: 10,
+							itemHeight: 10,
+							data: myData.legendArr,
+							textStyle: {
+								color: '#fff',
+								fontStyle: 'normal',
+								fontFamily: '微软雅黑',
+								fontSize: 12,
+							}
+						},
+						grid: {
+							x: 0,
+							y: 30,
+							x2: 0,
+							y2: 25,
+						},
+						xAxis: {
+							type: 'category',
+							data: data.xAxis,
+							axisTick: {
+								show: false,
+							},
+							axisLine: {
+								show: true,
+							},
+							axisLabel: { //轴标
+								show: true,
+								interval: 0,
+								textStyle: {
+									lineHeight:5,
+									padding: [2, 2, 0, 2],
+									height: 50,
+									fontSize: 12,
+									color:'#fff',
+								},
+								formatter:function(value){
+									if(value.length>7){
+										return value.substring(0,7)+"..";
+									}else{
+										return value;
+									}
+								},
+								rich: {
+									Sunny: {
+										height: 50,
+										// width: 60,
+										padding: [0, 5, 0, 5],
+										align: 'center',
+									},
+								},
+								color: '#687284',
+							},
+						},
+						yAxis: {
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+							axisLabel: {
+								show: false
+							},
+							splitLine: {
+								show: true,
+								lineStyle: {
+									color: '#F1F3F5',
+									type: 'solid'
+								},
+								interval: 2
+							},
+							splitNumber: 4,
+						},
+						series: myData.seriesArr
+					}
+					myChart1.setOption(option1);
+						},
+						error: function(err){console.log(err)}
+					})
+					
+				}
+			}
+		})
+		new Vue({
+			el:'#vue2',
+			data:{
+				main2_x:[],
+				main2_y:[]
+			},
+			created(){
+				this.get_data2()
+			},
+			mounted(){},
+			methods:{
+				get_data2(){
+					$.ajax({
+						url:root+'getProjectConversion',
+						type:'GET',
+						data:{},
+						success:((res)=>{
+							// console.log(res)
+							let datas = res.data
+							// console.log(datas)
+							let main2_x_1 = datas.map((e,i)=>{
+								return e.ProjectDay 
+							});
+							let set = new Set(main2_x_1)
+							this.main2_x = Array.from(set)
+							// console.log(this.main2_x)
+							let main2_y_1 = datas.map((e,i)=>{
+								return e.ConversionRate
+							});
+							let set2 = new Set(main2_y_1)
+							this.main2_y = Array.from(set2)
+							// console.log(this.main2_y)
+							var myChart2 = echarts.init(document.getElementById('main2'));
+							option2 = {
+								tooltip: {//鼠标指上时的标线
+									trigger: 'axis',
+									axisPointer: {
+										lineStyle: {
+											color: '#fff'
+										}
+									}
+								},
+								legend: {
+									icon: 'rect',
+									itemWidth: 14,
+									itemHeight: 5,
+									itemGap: 13,
+									data: ['转化率'],
+									right: '10px',
+									top: '0px',
+									textStyle: {
+										fontSize: 12,
+										color: '#fff'
+									}
+								},
+								grid: {
+									x: 35,
+									y: 25,
+									x2: 8,
+									y2: 25,
+								},
+								xAxis: [{
+									type: 'category',
+									boundaryGap: false,
+									axisLine: {
+										lineStyle: {
+											color: '#57617B'
+										}
+									},
+									axisLabel: {
+										textStyle: {
+											color:'#fff',
+										},
+									},
+									data: this.main2_x,
+								}],
+								yAxis: [{
+									type: 'value',
+									axisTick: {
+										show: false
+									},
+									axisLine: {
+										lineStyle: {
+											color: '#57617B'
+										}
+									},
+									axisLabel: {
+										margin: 10,
+										textStyle: {
+											fontSize: 14
+										},
+										textStyle: {
+											color:'#fff',
+										},
+									},
+									splitLine: {
+										lineStyle: {
+											color: '#57617B'
+										}
+									}
+								}],
+								series: [{
+									name: '转化率',
+									type: 'line',
+									smooth: true,
+									lineStyle: {
+										normal: {
+											width: 2
+										}
+									},
+									areaStyle: {
+										normal: {
+											color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+												offset: 0,
+												color: 'rgba(137, 189, 27, 0.3)'
+											}, {
+												offset: 0.8,
+												color: 'rgba(137, 189, 27, 0)'
+											}], false),
+											shadowColor: 'rgba(0, 0, 0, 0.1)',
+											shadowBlur: 10
+										}
+									},
+									itemStyle: {
+										normal: {
+											color: 'rgb(137,189,27)'
+										}
+									},
+									data: this.main2_y,
+								} ]
+							};
+							myChart2.setOption(option2);
+						}),
+						error:((err)=>{console.log(err)})
+					})
+				}
+			}
+		})
+		new Vue({
+			el:'#vue3',
+			data:{
+				datas:[],
+				datas_5_y:[],
+				datas_5_x:[],
+				datas_10_y:[],
+				datas_10_x:[]
+			},
+			created(){
+				this.get_data3()
+			},
+			mounted(){},
+			methods:{
+				get_data3(){
+					$.ajax({
+						url:root+'getBackProjectRate',
+						type:'GET',
+						data:{},
+						success:((res)=>{
+							// console.log(res)
+							this.datas = res.data
+							let datas5 = this.datas.slice(0,5)
+							let datas10 = this.datas.slice(5,10)
+							// console.log(this.datas)
+							// console.log(datas5)
+							// console.log(datas10)
+							let datas_5_y_1 = datas5.map((e,i)=>{
+								return e.DepartmentName 
+							});
+							let set = new Set(datas_5_y_1)
+							this.datas_5_y = Array.from(set)
+							// console.log(this.datas_5_y)
+							let datas_5_x_1 = datas5.map((e,i)=>{
+								let datas5 = (e.ContractAmount/200000).toFixed(2)
+								// return e.ContractAmount 
+								return datas5
+							});
+							let set2 = new Set(datas_5_x_1)
+							this.datas_5_x = Array.from(set2)
+							// console.log(this.datas_5_x)
+							let datas_10_y_1 = datas10.map((e,i)=>{
+								return e.DepartmentName 
+							});
+							let set3 = new Set(datas_10_y_1)
+							this.datas_10_y = Array.from(set3)
+							// console.log(this.datas_10_y)
+							let datas_10_x_1 = datas10.map((e,i)=>{
+								let datas10 = (e.ContractAmount/200000).toFixed(2)
+								// return e.ContractAmount 
+								return datas10
+							});
+							let set4 = new Set(datas_10_x_1)
+							this.datas_10_x = Array.from(set4)
+							// console.log(this.datas_10_x)
+							var myChart4 = echarts.init(document.getElementById('main4'));
+							var spirit = '../images.ksh45.png';
+							var maxData = 1000;
+							option4 = {
+							"title": {
+								"text": " ",
+								"left": "center",
+								"y": "10",
+								"textStyle": {
+									"color": "#fff"
+								}
+								},
+								
+								"grid": {
+								"left": 30,
+								"top": 0,
+								"bottom": 10
+								},
+								"tooltip": {
+								"show":false,
+								"trigger": "item",
+								"textStyle": {
+									"fontSize": 12
+								},
+								"formatter": "{b0}:{c0}"
+								},
+								"xAxis": {
+								"max": 100,
+								"splitLine": {
+									"show": false
+								},
+								"axisLine": {
+									"show": false
+								},
+								"axisLabel": {
+									"show": false
+								},
+								"axisTick": {
+									"show": false
+								}
+								},
+								"yAxis": [
+								{
+									"type": "category",
+									"inverse": true,
+									"data": this.datas_5_y,
+									"axisLine": {
+									"show": false
+									},
+									"axisTick": {
+									"show": false
+									},
+									"axisLabel": {
+										rotate:'20',
+										"margin": -4,
+										"textStyle": {
+											"color": "#fff",
+											"fontSize": 16.25
+										},
+										formatter:function(value){
+											if(value.length>2){
+												return value.substring(0,2)+"..";
+											}else{
+												return value;
+											}
+										}
+									}
+								},
+								
+								],
+								"series": [
+								{
+									"type": "pictorialBar",
+									"symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+									"symbolRepeat": "fixed",
+									"symbolMargin": "5%",
+									"symbolClip": true,
+									"symbolSize": 22.5,
+									"symbolPosition": "start",
+									"symbolOffset": [20,0],
+									"symbolBoundingData": 100,
+									"data": this.datas_5_x,
+									"z": 10
+								},
+								{
+									"type": "pictorialBar",
+									"itemStyle": {
+									"normal": {
+										"opacity": 0.3
+									}
+									},
+									"label": {
+									"normal": {
+										"show": false
+									}
+									},
+									"animationDuration": 200,
+									"symbolRepeat": "fixed",
+									"symbolMargin": "5%",
+									"symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+									"symbolSize": 22.5,
+									"symbolBoundingData": 100,
+									"symbolPosition": "start",
+									"symbolOffset": [20,0],
+									"data": this.datas_5_x,
+									"z": 5
+								}
+								]
+							};
+							myChart4.setOption(option4);
+							var myChart41 = echarts.init(document.getElementById('main41'));
+							var spirit = '../images.ksh45.png';
+							var maxData = 1000;
+							option41 = {
+							"title": {
+								"text": " ",
+								"left": "center",
+								"y": "10",
+								"textStyle": {
+									"color": "#fff"
+								}
+								},
+								
+								"grid": {
+								"left": 30,
+								"top": 0,
+								"bottom": 10
+								},
+								"tooltip": {
+									"show":false,
+								"trigger": "item",
+								"textStyle": {
+									"fontSize": 12
+								},
+								"formatter": "{b0}:{c0}"
+								},
+								"xAxis": {
+								"max": 100,
+								"splitLine": {
+									"show": false
+								},
+								"axisLine": {
+									"show": false
+								},
+								"axisLabel": {
+									"show": false
+								},
+								"axisTick": {
+									"show": false
+								}
+								},
+								"yAxis": [
+								{
+									"type": "category",
+									"inverse": true,
+									"data": this.datas_10_y,
+									"axisLine": {
+									"show": false
+									},
+									"axisTick": {
+									"show": false
+									},
+									"axisLabel": {
+										rotate:'20',
+										"margin": -4,
+										"textStyle": {
+											"color": "#fff",
+											"fontSize": 16.25
+										},
+										formatter:function(value){
+											if(value.length>2){
+												return value.substring(0,2)+"..";
+											}else{
+												return value;
+											}
+										}
+									}
+								},
+								
+								],
+								"series": [
+								{
+									"type": "pictorialBar",
+									"symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+									"symbolRepeat": "fixed",
+									"symbolMargin": "5%",
+									"symbolClip": true,
+									"symbolSize": 22.5,
+									"symbolPosition": "start",
+									"symbolOffset": [20,0],
+									"symbolBoundingData": 100,
+									"data": this.datas_10_x,
+									"z": 10
+								},
+								{
+									"type": "pictorialBar",
+									"itemStyle": {
+									"normal": {
+										"opacity": 0.3
+									}
+									},
+									"label": {
+									"normal": {
+										"show": false
+									}
+									},
+									"animationDuration": 200,
+									"symbolRepeat": "fixed",
+									"symbolMargin": "5%",
+									"symbol": "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAADYElEQVR4nO2dz0sUYRjHP7tIdAmxQ1LdlhCKMohAIsgiyEuHjkUEFQTlpejS/xCCBB06RBGBBKIG4cGyH0qHBKE9eKyFqBQPRQeNCt06vGNY7bq7szPfeZLnAwuzM+/zgw/DDvMu70wOIVveLscJOwycA44A24CfwAfgKXAbeFVvovlC/o/vuVwuTj+x0FWiYdGbgXvA8RrjHgAXgIVaCbMU3SKr1BhtwEtgZx1jTwI7gG7ga5pNNUO+9pBMuEN9klfYD9xMqZdEsCj6AHAiRtxZYFeyrSSHRdGnYsblCD8jJrEoek8TsbsT6yJhLIrelFFsqlgUPZtRbKpYFP2kidjxxLpIGIuiB4AvMeLmgJGEe0kMi6I/AVdjxPVSx91hVlgUDXAXuEaY16jFMnAJeJhqR01iVTTAdeAYUFxjzBRwCLgl6agJrM51rDAO7AP2EmbxthPO8vfAc2Ams84axLpoCGKLrH1mm8eC6KPAGaAL2Fpj7AZgY7T9DfhRY/wc4eflPmH+OjOynI8uEGbpukXlJ4Dz84V8aWWHcj46q4thFzCNTjJRren2UrlLWPM3WYjuAMYIk/tq2oCx9lK5Q11YLboFGARaxXVX0woMtpfK0uuTWvRFoFNcsxKdhF5kqEX3iuuthbQXtehG/gdMG2kvlm/B1xUuWoSLFmFF9CRwg2TnM4pRzskEc8bGiugR4ArhNjkpJqKcJv51sSJ63eOiRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEWvTHKvs/p1izWu5qvaSCWvTlCvtmgeEUaw5TeUVtpV5SQy16COgBRoHXhMWb3aS7PnAhqjEQ1RwFeuYL+aEUa/5DFmtYHkefOEwQVmcBvKD+FQNvgNN/P+pHiV8MRbhoES5ahIsW4aJFuGgRLlqEixbhokW4aBEuWoSLFuGiRbhoES5ahIsW4aJFuGgRLlqEixbhokVYEx3nudGKXE1jTfS6xUWLcNEiXLQIFy3CRYtw0SJctAgXLcJFi3DRIv430eUq2+axJvp7jePPqmzHySXFmuhHwFKVYzNA/6rv/VR/s9BSlMsM1kTPEN4DPkU4I8vAO6APOAgsrhq7GO3ri8aUo5ipKIep1zv9AtipgOACGIrLAAAAAElFTkSuQmCC",
+									"symbolSize": 22.5,
+									"symbolBoundingData": 100,
+									"symbolPosition": "start",
+									"symbolOffset": [20,0],
+									"data": this.datas_10_x,
+									"z": 5
+								}
+								]
+							};
+							myChart41.setOption(option41);
+							var mySwiper2 = new Swiper('.visual_swiper2', {
+								autoplay: true,//可选选项，自动滑动
+								direction : 'vertical',//可选选项，滑动方向
+								speed:2000,//可选选项，滑动速度
+							})
+						}),
+						error:((err)=>{console.log(err)})
+					})
+				}
+			}
+		})
+		new Vue({
+			el:'#vue51',
+			data:{
+				datas_x_1:[]
+			},
+			created(){
+				this.get_data51()
+			},
+			methods:{
+				get_data51(){
+					$.ajax({
+						url:root+'getBackProjectRate',
+						type:'GET',
+						data:{},
+						success:((res)=>{
+							// console.log(res)
+							let datas = res.data
+							
+							// console.log(this.datas)
+							let datas_x = datas.map((e,i)=>{
+								return e.DepartmentName 
+							});
+							let sets = new Set(datas_x)
+							this.datas_x_1 = Array.from(sets)
+							console.log(this.datas_x_1)
+						}),
+						error:((err)=>{console.log(err)})
+					})
+				}
+			}
+		})
+		new Vue({
+			el:'#vue4',
+			data:{
+				mark1:'',
+				mark2:'',
+				mark3:'',
+				mark4:''
+			},
+			created(){
+				this.get_data4()
+			},
+			mounted(){
+			},
+			methods:{
+				get_data4(){
+					$.ajax({
+						url: root + 'GetProjectCountBySource',
+						type: 'GET',
+						data: {},
+						success: ((res)=>{
+							let datas = res.data
+							// console.log(datas)
+							for(let i = 0;i<datas.length;i++){
+								if(datas[i].ProjectSource==1){
+									this.mark1 = datas[i].ProjectCount
+								}
+								if(datas[i].ProjectSource==2){
+									this.mark2 = datas[i].ProjectCount
+								}
+								if(datas[i].ProjectSource==3){
+									this.mark3 = datas[i].ProjectCount
+								}
+								
+							}
+							this.mark4 = Number(this.mark1)+Number(this.mark2)+Number(this.mark3)
+							// console.log(this.mark4)
+						}),
+						error:function(err){ console.log(err) }
+					})
+				}
+			}
+		})
+		new Vue({
+			el:'#vue5',
+			data:{
+				datas:[],
+				datas5_x:[],
+				datas5_y:[]
+			},
+			created(){
+				this.get_data5()
+			},
+			mounted(){},
+			methods:{
+				get_data5(){
+					$.ajax({
+						url:root+'getProjectCountByProvince',
+						type: 'GET',
+						data: {},
+						success:((res)=>{
+							// console.log(res)
+							this.datas= res.data
+							// console.log(this.datas)
+							var myChart8 = echarts.init(document.getElementById('main8'));
+							option8 = {
+								title: {
+									text: '',
+									left: 'center',
+									textStyle: {
+										color: '#fff'
+									}
+								},
+								tooltip: {
+									trigger: 'item',
+									formatter: function (params) {
+										return params.name + ' : ' + params.value;
+									}
+								},
+								geo: {
+									type:'map',
+									map: 'china',
+									label: {
+										emphasis: {//鼠标移动显示省份名称
+											show: true,
+											textStyle:{
+											color:"#FFFFFF",
+											}
+										}
+									},
+									roam: true,//拖拽拉伸
+									itemStyle: {
+										normal: {//地图背景色
+											areaColor: 'rgba(7,21,57,0.5)',
+											borderColor: '#0177ff'
+										},
+										emphasis: {
+											areaColor: '#0099CC'//鼠标指向时的颜色
+										}
+									}
+								},
+								visualMap: {
+									x: 'left',
+									y: '30%',//可以设置左边提示的位置；
+									min: 0,
+									max: 1000,
+									text: ['1000','0'],
+									show:true,
+									color: ['#d94e5d','#eac736','#50a3ba'],
+									textStyle: {
+										color: '#fff'
+									}
+								},
+								series: [
+									{
+										name: 'ces',
+										geoIndex:0,
+										type: 'map',
+										// roam:true,
+										data: this.datas,
+										// symbolSize: 16,//散点图大小
+										label: {
+											normal: {//在有数据的地区上展示
+												show: false
+											},
+											emphasis: {//鼠标指向时展示
+												show: false
+											}
+										},
+									}
+								]
+							};
+							myChart8.setOption(option8);
+							var myChart3 = echarts.init(document.getElementById('main3'));
+							var datas_5 = this.datas.slice(0,5)
+							// console.log(datas_5)
+							let datas_5_x_1 = datas_5.map((e,i)=>{
+								return e.name 
+							});
+							let set = new Set(datas_5_x_1)
+							this.datas5_x = Array.from(set)
+							// console.log(this.datas5_x)
+							let datas_5_y_1 = datas_5.map((e,i)=>{
+								return e.value
+							});
+							let set2 = new Set(datas_5_y_1)
+							this.datas5_y = Array.from(set2)
+							// console.log(this.datas5_y)
+							var color = ['#e9df3d', '#f79c19', '#21fcd6', '#08c8ff', '#df4131'];
+							var data = datas_5;
+							var max = data[0].value;
+							// data.forEach(function(d) {
+							// 	max = d.value > max ? d.value : max;
+							// });
+
+							var renderData = [{
+								value: [],
+								name: "项目分布",
+								symbol: 'none',
+								lineStyle: {
+									normal: {
+										color: '#ecc03e',
+										width: 2
+									}
+								},
+								areaStyle: {
+									normal: {
+										color: new echarts.graphic.LinearGradient(0, 0, 1, 0,
+											[{
+												offset: 0,
+												color: 'rgba(203, 158, 24, 0.8)'
+											}, {
+												offset: 1,
+												color: 'rgba(190, 96, 20, 0.8)'
+											}],
+											false)
+									}
+								}
+							}];
+
+
+							data.forEach(function(d, i) {
+								var value = ['', '', '', '', ''];
+								value[i] = max,
+								renderData[0].value[i] = d.value;
+								renderData.push({
+									value: value,
+									symbol: 'circle',
+									symbolSize: 12,
+									lineStyle: {
+										normal: {
+											color: 'transparent'
+										}
+									},
+									itemStyle: {
+										normal: {
+											color: color[i],
+										}
+									}
+								})
+								// console.log(renderData)
+							})
+							var indicator = [];
+
+							data.forEach(function(d) {
+								indicator.push({
+									name: d.name,
+									max: max,
+									color: '#fff'
+								})
+							})
+
+
+							option3 = {
+								tooltip: {
+									show: true,
+									trigger: "item",
+									triggerOn:"mousemove",
+									position:['50%', '20%'], 
+								},
+								radar: {
+									center: ["50%", "50%"],//偏移位置
+									radius: "80%",
+									startAngle: 40, // 起始角度
+									splitNumber: 4,
+									shape: "circle",
+									splitArea: {
+										areaStyle: {
+											color: 'transparent'
+										}
+									},
+									axisLabel: {
+										show: false,
+										fontSize: 20,
+										color: "#000",
+										fontStyle: "normal",
+										fontWeight: "normal"
+									},
+									axisLine: {
+										show: true,
+										lineStyle: {
+											color: "rgba(255, 255, 255, 0.5)"
+										}
+									},
+									splitLine: {
+										show: true,
+										lineStyle: {
+											color: "rgba(255, 255, 255, 0.5)"
+										}
+									},
+									indicator: indicator
+								},
+								
+								series: [{
+									type: "radar",
+									data: renderData
+								}]
+							}
+							myChart3.setOption(option3);
+							var myChart9 = echarts.init(document.getElementById('main9'));
+							var data = {
+						id: 'multipleBarsLines',
+						legendBar: ['项目'],
+						symbol: ' ', //数值是否带百分号        --默认为空 ''
+						xAxis: this.datas5_x,
+						yAxis: [
+							this.datas5_y,
+							// this.main1_y_1,
+							// this.main1_y_2
+						],
+						barColor: ['#009883', '#0066CC','#FF6666'], //柱子颜色 必填参数
+					}
+					var myData = (function test() {
+						let yAxis = data.yAxis || []
+						
+						// let lines = data.lines || []
+						let legendBar = data.legendBar || []
+						let legendLine = data.legendLine || []
+						var symbol = data.symbol || ' '
+						let seriesArr = []
+						let legendArr = []
+						yAxis && yAxis.forEach((item, index) => {
+							legendArr.push({
+								name: legendBar && legendBar.length > 0 && legendBar[index]
+							})
+							seriesArr.push({
+								name: legendBar && legendBar.length > 0 && legendBar[index],
+								type: 'bar',
+								barGap: '0.5px',
+								data: item,
+								barWidth: data.barWidth || 12,
+								label: {
+									normal: {
+										show: false,
+										formatter: '{c}' + symbol,
+										position: 'top',
+										textStyle: {
+											color: '#000',
+											fontStyle: 'normal',
+											fontFamily: '微软雅黑',
+											textAlign: 'left',
+											fontSize: 11,
+										},
+									},
+								},
+								itemStyle: { //图形样式
+									normal: {
+										barBorderRadius:0,
+										borderWidth:1,
+										borderColor:'#ddd',
+										color: data.barColor[index]
+									},
+								}
+							})
+						})
+						return {
+							seriesArr,
+							legendArr
+						}
+					})()
+					option9 = {
+						title: {
+							show: true,
+							text: data.title,
+							subtext: data.subTitle,
+							link: '1111'
+						},
+						tooltip: {
+							trigger: 'axis',
+							formatter: function(params) {
+								var time = '';
+								var str = '';
+								for (var i of params) {
+									time = i.name.replace(/\n/g, '') + '<br/>';
+									if (i.data == 'null' || i.data == null) {
+										str += i.seriesName + '：无数据' + '<br/>'
+									} else {
+										str += i.seriesName + '：' + i.data
+									}
+								}
+								return time + str;
+							},
+							axisPointer: {
+								type: 'none'
+							},
+						},
+						legend: {
+							right: data.legendRight || '30%',
+							top: 0,
+							right:10,
+							itemGap: 16,
+							itemWidth: 10,
+							itemHeight: 10,
+							data: myData.legendArr,
+							textStyle: {
+								color: '#fff',
+								fontStyle: 'normal',
+								fontFamily: '微软雅黑',
+								fontSize: 12,
+							}
+						},
+						grid: {
+							x: 0,
+							y: 30,
+							x2: 0,
+							y2: 25,
+						},
+						xAxis: {
+							type: 'category',
+							data: data.xAxis,
+							axisTick: {
+								show: false,
+							},
+							axisLine: {
+								show: true,
+							},
+							axisLabel: { //轴标
+								show: true,
+								interval: 0,
+								textStyle: {
+									lineHeight:5,
+									padding: [2, 2, 0, 2],
+									height: 50,
+									fontSize: 12,
+									color:'#fff',
+								},
+								formatter:function(value){
+									if(value.length>7){
+										return value.substring(0,7)+"..";
+									}else{
+										return value;
+									}
+								},
+								rich: {
+									Sunny: {
+										height: 50,
+										// width: 60,
+										padding: [0, 5, 0, 5],
+										align: 'center',
+									},
+								},
+								color: '#687284',
+							},
+						},
+						yAxis: {
+							axisLine: {
+								show: false
+							},
+							axisTick: {
+								show: false
+							},
+							axisLabel: {
+								show: false
+							},
+							splitLine: {
+								show: true,
+								lineStyle: {
+									color: '#F1F3F5',
+									type: 'solid'
+								},
+								interval: 2
+							},
+							splitNumber: 4,
+						},
+						series: myData.seriesArr
+					}
+							myChart9.setOption(option9);
+						}),
+						error:((err)=>{console.log(err)})
+					})
+				}
+			}
+		})
+		new Vue({
+			el:'#vue9',
+			data:{
+				yx:true,
+				sc:false,
+			},
+			created() {
+				
+			},
+			mounted(){
+
+			},
+			methods:{
+				yxpm(){
+					this.yx = true
+					this.sc = false
+					// console.log(1)
+					var myChart4 = echarts.init(document.getElementById('main4'));
+					myChart4.setOption(option4);
+					var myChart41 = echarts.init(document.getElementById('main41'));
+					myChart41.setOption(option41);
+					var mySwiper2 = new Swiper('.visual_swiper2', {
+						autoplay: true,//可选选项，自动滑动
+						direction : 'vertical',//可选选项，滑动方向
+						speed:2000,//可选选项，滑动速度
+					})
+					// console.log(2)
+				},
+				scpm(){
+					this.sc = true
+					this.yx = false
+					// console.log(3)
+					var myChart42 = echarts.init(document.getElementById('main42'));
+					myChart42.setOption(option42);
+					// console.log(4)
+				}
+			}
+		})
+	</script>
+</body>
+</html>

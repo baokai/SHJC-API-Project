@@ -1,0 +1,81 @@
+﻿@{ ViewBag.Title = "批量审核页面";
+    Layout = "~/Views/Shared/_Form.cshtml"; }
+@Html.AppendCssFile("/Areas/LR_CodeDemo/Views/ProjectPayment/BatchAuditAdd.css")
+<div class="lr-layout">
+        <div class="lr-layout-center">
+            <div class="lr-layout-wrap lr-layout-wrap-notitle">
+                <div class="lr-layout-tool">
+                    <div class="lr-layout-tool-left">
+                        <div class="lr-layout-tool-item">
+                            <div id="datesearch"></div>
+                        </div>
+                        <div class="lr-layout-tool-item">
+                            <input id="txt_Keyword" type="text" class="form-control" placeholder="请输入要查询关键字" />
+                        </div>
+                        <div class="lr-layout-tool-item">
+                            <a id="btn_Search" class="btn btn-primary btn-sm"><i class="fa fa-search"></i>&nbsp;<span class="lrlg">查询</span></a>
+                        </div>
+                        <div class="lr-layout-tool-item">
+                            <div id="multiple">
+                                <div class="lr-query-formcontent">
+                                    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+                                        <div class="lr-form-item-title">付款类型  <font face="宋体">*</font></div>
+                                        <div id="PayType"></div>
+                                    </div>
+                                    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+                                        <div class="lr-form-item-title">收款单位名称<font face="宋体">*</font></div>
+                                        <input id="Payee" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+                                    </div>
+                                    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+                                        <div class="lr-form-item-title">收款银行<font face="宋体">*</font></div>
+                                        <input id="PayeeBank" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+                                    </div>
+                                    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+                                        <div class="lr-form-item-title">银行账号<font face="宋体">*</font></div>
+                                        <input id="BankAccount" type="text" class="form-control" isvalid="yes" checkexpession="NotNull">
+                                    </div>
+                                    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+                                        <div class="lr-form-item-title">支付金额<font face="宋体">*</font></div>
+                                        <input id="PaymentAmount"  class="form-control" isvalid="yes" checkexpession="NotNull" />
+                                    </div>
+                                    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+                                        <div class="lr-form-item-title">付款方式 <font face="宋体">*</font></div>
+                                        <div id="PaymentMethod" isvalid="yes" checkexpession="NotNull"></div>
+                                    </div>
+                                    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+                                        <div class="lr-form-item-title">我司支付<font face="宋体">*</font></div>
+                                        <div id="PaymentHeader" isvalid="yes" checkexpession="NotNull"></div>
+                                    </div>
+                                    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+                                        <div class="lr-form-item-title">外付事由<font face="宋体">*</font></div>
+                                        <textarea id="PaymentReason" class="form-control" style="height:100px;" isvalid="yes" checkexpession="NotNull"></textarea>
+                                    </div>
+                                    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+                                        <div class="lr-form-item-title">附件上传<font face="宋体">*</font></div>
+                                        <div id="PaymentFile" isvalid="yes" checkexpession="NotNull"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lr-layout-tool-right">
+
+                        <div class=" btn-group btn-group-sm">
+                            <a id="lr_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                        </div>
+                        <div class=" btn-group btn-group-sm">
+                            <a id="lr_agreList" class="btn btn-circle"><i class="fa fa-yelp"></i>&nbsp;<span class="lrlg">批量添加</span></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lr-layout-body" id="gridtable">
+                </div>
+            </div>
+        </div>
+    </div>
+
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectPaymentList/BatchAuditAdd.js")
+
+
+

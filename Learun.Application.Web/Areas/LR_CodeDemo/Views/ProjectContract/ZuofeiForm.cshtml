@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "项目合同查看";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+
+<div class="lr-form-wrap" id="form">
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">取消原因<font face="宋体">*</font></div>
+        <textarea id="CancelTheReason" class="form-control" style="height:200px;" isvalid="yes" checkexpession="NotNull"></textarea>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectContract/ZuofeiForm.js")

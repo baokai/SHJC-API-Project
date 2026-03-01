@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name=”renderer” content=”webkit|ie-comp|ie-stand” />
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <link rel="icon" href="~/favicon.ico">
+
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/pace/pace-theme-minimal.css" rel="stylesheet" />
+    <link href="~/Content/font/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    @{ ViewBag.Title = "甘特图3";
+        Layout = "~/Views/Shared/_Index.cshtml"; }
+    @Html.AppendCssFile(
+     "/Views/LR_Content/style/lr-common.css",
+        "/Views/LR_Content/plugin/scroll/scroll.css",
+    "/Views/Home/AdminDesktopTemp/index.css",
+     "/Views/Home/echarts.css")
+    @Html.AppendCssFile("/Views/LR_Content/plugin/gantt/lrGantt.css")
+    <!--[if lt IE 9]>
+      <script src="~/Content/bootstrap/html5shiv.min.js"></script>
+      <script src="~/Content/bootstrap/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .echarts_title {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items:center;
+        }
+        .goDP{
+            margin:0 10px;
+        }
+        .tjzq {
+            width: 50px;
+            height: 30px;
+            border: 1px solid black;
+            border-radius: 5px;
+            margin: 5px 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+
+</head>
+<body class="@Learun.Util.Net.Browser @Learun.Util.WebHelper.GetUITheme()">
+    <div class="lr-desktop-panel">
+        <div class="col-xs-12">
+            <div class="portal-panel-title">
+                <i class="fa fa-balance-scale"></i>&nbsp;&nbsp;统计指标
+            </div>
+            <div class="portal-panel-content">
+                <div class="lr-item-20">
+                    <div class="task-stat" style="background-color: #578ebe;">
+                        <div class="visual">
+                            <i class="fa fa-pie-chart"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number" id="InquiryCount">
+                                0
+                            </div>
+                            <div class="desc">
+                                今日商机
+                            </div>
+                        </div>
+                        <a class="more" style="background-color: #4884b8;" href="" onclick="OpenNav('66f6301c-1789-4525-a7d2-2b83272aafa6')">
+                            查看更多 <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="lr-item-20">
+                    <div class="task-stat" style="background-color: #e35b5a;">
+                        <div class="visual">
+                            <i class="fa fa-bar-chart-o"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number" id="Count">
+                                0
+                            </div>
+                            <div class="desc">
+                                最新客户量
+                            </div>
+                        </div>
+                        <a class="more" style="background-color: #e04a49;" href="javascript:;" onclick="OpenNav('1d3797f6-5cd2-41bc-b769-27f2513d61a9')">
+                            查看更多 <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="lr-item-20">
+                    <div class="task-stat" style="background-color: #44b6ae;">
+                        <div class="visual">
+                            <i class="fa fa-windows"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number" id="SignedSum">
+                                0
+                            </div>
+                            <div class="desc">
+                                今日签约
+                            </div>
+                        </div>
+                        <a class="more" style="background-color: #3ea7a0;" href="javascript:;" onclick="OpenNav('b352f049-4331-4b19-ac22-e379cb30bd55')">
+                            查看更多 <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="lr-item-20">
+                    <div class="task-stat" style="background-color: #8775a7;">
+                        <div class="visual">
+                            <i class="fa fa-globe"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number" id="CollectionSum">
+                                0
+                            </div>
+                            <div class="desc">
+                                应收账款
+                            </div>
+                        </div>
+                        <a class="more" style="background-color: #7c699f;" href="javascript:;">
+                            查看更多 <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="lr-item-20">
+                    <div class="task-stat" style="background-color: #3598dc;">
+                        <div class="visual">
+                            <i class="fa fa-globe"></i>
+                        </div>
+                        <div class="details">
+                            <div class="number" id="PaymentSum">
+                                0
+                            </div>
+                            <div class="desc">
+                                应付账款
+                            </div>
+                        </div>
+                        <a class="more" style="background-color: #258fd7;" href="javascript:;">
+                            查看更多 <i class="fa fa-arrow-circle-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="portal-panel-title">
+                <i class="fa fa-coffee"></i>&nbsp;&nbsp;待办任务（Top 5）
+                <span class="menu" title="更多" id="flowmore"><span class="point"></span><span class="point"></span><span class="point"></span></span>
+            </div>
+            <div class="portal-panel-content" style="overflow: hidden; padding-top: 20px; padding-left: 30px; padding-right: 50px;" id="flowlist">
+                @*<div class="lr-msg-line">
+                    <a href="#" style="text-decoration: none;">[审批]&nbsp;&nbsp;&nbsp;老李的请假条</a>
+                    <label>2016-05-25</label>
+                </div>
+                <div class="lr-msg-line">
+                    <a href="#" style="text-decoration: none;">[审批]&nbsp;&nbsp;&nbsp;陈日天的转岗申请单</a>
+                    <label>2016-04-01</label>
+                </div>
+                <div class="lr-msg-line">
+                    <a href="#" style="text-decoration: none;">[工作]&nbsp;&nbsp;&nbsp;回访千事汇通项目负责人</a>
+                    <label>2015-09-11</label>
+                </div>
+                <div class="lr-msg-line">
+                    <a href="#" style="text-decoration: none;">[工作]&nbsp;&nbsp;&nbsp;联系宋卡公司财务支付二期尾款</a>
+                    <label>2015-02-19</label>
+                </div>
+                <div class="lr-msg-line">
+                    <a href="#" style="text-decoration: none;">[审批]&nbsp;&nbsp;&nbsp;刘昊的借支申请单</a>
+                    <label>2015-02-26</label>
+                </div>*@
+            </div>
+        </div>
+        @*<div class="col-xs-6">
+            <div class="portal-panel-title">
+                <i class="fa fa-bullhorn"></i>&nbsp;&nbsp;公告/通知（Top 5）
+            </div>
+            <div class="portal-panel-content" style="overflow: hidden; padding-top: 20px; padding-left: 30px; padding-right: 50px;">
+                <div class="lr-msg-line">
+                    <a href="#" style="text-decoration: none;">[公告]&nbsp;&nbsp;&nbsp;端午节放假安排</a>
+                    <label>2016-06-01</label>
+                </div>
+                <div class="lr-msg-line">
+                    <a href="#" style="text-decoration: none;">[通知]&nbsp;&nbsp;&nbsp;苏州分公司总经理任命书</a>
+                    <label>2016-05-28</label>
+                </div>
+                <div class="lr-msg-line">
+                    <a href="#" style="text-decoration: none;">[通知]&nbsp;&nbsp;&nbsp;公司开票信息更新通知</a>
+                    <label>2016-05-23</label>
+                </div>
+                <div class="lr-msg-line">
+                    <a href="#" style="text-decoration: none;">[公告]&nbsp;&nbsp;&nbsp;全体员工体检通知</a>
+                    <label>2016-04-06</label>
+                </div>
+                <div class="lr-msg-line">
+                    <a href="#" style="text-decoration: none;">[通知]&nbsp;&nbsp;&nbsp;华东区营销总监任命书</a>
+                    <label>2016-04-18</label>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-xs-12">
+            <div class="portal-panel-title">
+                <i class="fa fa-coffee"></i>&nbsp;&nbsp;统计图
+                <span class="menu" title="更多" id="flowmore"><span class="point"></span><span class="point"></span><span class="point"></span></span>
+            </div>
+            <div class="echarts_container" id="container" style="width:1600px;height:900px;min-width:1200px;min-height:600px;  margin:20px auto;">
+                <div class="echarts_title">
+                    @*<div >周</div>
+        <div >月</div>*@
+                    <button class="tjzq" id="week" onclick="tjzq1()">周</button>
+                    <button class="tjzq" id="month" onclick="tjzq2()">月</button>
+                    @*<a href="../jc/index.html" class="goDP">更多</a>*@
+                    @*<span onclick="go_dp()">更多</span>*@
+                    @*<a href="~/Views/jc/index.html">更多</a>*@
+                    @*<a href="http://www.taobao.com" target="_blank">更多</a>*@
+                    @*Html.RenderPartial("~/Views/jc/index.html");*@
+                    @*<a @Html.RenderPartial("~/Views/Home/GetResult.htm") />更多</a>*@
+                </div>
+                <div class="main" id="main" style="width:100%;height:100%;">
+
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12">
+            <div class="portal-panel-title" style="display:none">
+                <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;生产计划
+            </div>
+            <div class="portal-panel-content" style="display:none">
+                <div id="gridtable" class="lr-chart-container" style="border:1px solid #ccc;"></div>
+            </div>
+        </div>
+        <div class="col-xs-6">
+            <div class="portal-panel-title" style="display:none">
+                <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;局站分类型总用电占比
+            </div>
+            @*<div class="portal-panel-content">
+                <div id="piecontainer1" class="lr-chart-container"></div>
+            </div>*@
+        </div>
+        <div class="col-xs-6">
+            <div class="portal-panel-title" style="display:none">
+                <i class="fa fa-bar-chart"></i>&nbsp;&nbsp;预算与实际用电量对比
+            </div>
+            @*<div class="portal-panel-content">
+                <div id="linecontainer1" class="lr-chart-container"></div>
+            </div>*@
+        </div>
+    </div>
+
+    <script src="~/Content/jquery/jquery-1.10.2.min.js"></script>
+    <script src="~/Content/echarts/echarts.js"></script>
+    <script>
+        
+        var Type = "week";
+        var bumen = '';
+        var jine = '';
+        var shul = '';
+        $('get').ready(function () {
+            // alert("页面加载完成！")；
+         @*   var Count = 0;
+            var InquiryCount = 0;
+            var SignedSum = 0;
+            var CollectionSum = 0;
+            var PaymentSum = 0;*@
+            @*get();*@
+            @*$("body").everyTime('1s', get());*@
+            get();
+            let we = document.getElementById('week');
+            we.style.backgroundColor = "#0099CC";
+            get_data();
+          
+            $(function () {
+                setInterval(function () {
+                    //获取客户
+                    $.ajax({
+                        url: top.$.rootUrl + '/LR_CodeDemo/Customer/GetCount',
+                        type: 'GET',
+                        dataType: "json",
+                        success: function (res) {
+                            $("#Count").text(res.data[0].Column1);
+                            console.log("获取客户" + res)
+                        },
+                    })
+
+                    //获取新增商机
+                    $.ajax({
+                        url: top.$.rootUrl + '/LR_CodeDemo/Customer/GetInquiryCount',
+                        type: 'GET',
+                        dataType: "json",
+                        success: function (res) {
+                            $("#InquiryCount").text(res.data[0].Column1);
+                        },
+                    })
+                    //获取今日签约
+                    $.ajax({
+                        url: top.$.rootUrl + '/LR_CodeDemo/Customer/GetSignedSum',
+                        type: 'GET',
+                        dataType: "json",
+                        success: function (res) {
+                            $("#SignedSum").text(res.data[0].Column1);
+                        },
+                    })
+                    //获取应收账款
+                    $.ajax({
+                        url: top.$.rootUrl + '/LR_CodeDemo/Customer/GetCollectionSum',
+                        type: 'GET',
+                        dataType: "json",
+                        success: function (res) {
+                            $("#CollectionSum").text(res.data[0].Column1);
+                        },
+                    })
+                    //获取应付账款
+                    $.ajax({
+                        url: top.$.rootUrl + '/LR_CodeDemo/Customer/GetPaymentSum',
+                        type: 'GET',
+                        dataType: "json",
+                        success: function (res) {
+                            $("#PaymentSum").text(res.data[0].Column1);
+                        },
+                    })
+                },1000*60*10);
+            });
+        });
+
+        function get() {
+            //获取客户
+            $.ajax({
+                url: top.$.rootUrl + '/LR_CodeDemo/Customer/GetCount',
+                type: 'GET',
+                dataType:"json",
+                success: function (res) {
+                    $("#Count").text(res.data[0].Column1);
+                    console.log("获取客户" + res.data[0].Column1)
+                },
+            })
+
+            //获取新增商机
+            $.ajax({
+                url: top.$.rootUrl + '/LR_CodeDemo/Customer/GetInquiryCount',
+                type: 'GET',
+                dataType: "json",
+                success: function (res) {
+                    $("#InquiryCount").text(res.data[0].Column1);
+                },
+            })
+            //获取今日签约
+            $.ajax({
+                url: top.$.rootUrl + '/LR_CodeDemo/Customer/GetSignedSum',
+                type: 'GET',
+                dataType: "json",
+                success: function (res) {
+                    $("#SignedSum").text(res.data[0].Column1);
+                },
+            })
+            //获取应收账款
+            $.ajax({
+                url: top.$.rootUrl + '/LR_CodeDemo/Customer/GetCollectionSum',
+                type: 'GET',
+                dataType: "json",
+                success: function (res) {
+                    $("#CollectionSum").text(res.data[0].Column1);
+                },
+            })
+            //获取应付账款
+            $.ajax({
+                url: top.$.rootUrl + '/LR_CodeDemo/Customer/GetPaymentSum',
+                type: 'GET',
+                dataType: "json",
+                success: function (res) {
+                    $("#PaymentSum").text(res.data[0].Column1);
+                },
+            })
+        }
+        function tjzq1() {
+            this.week = true;
+            this.month = false;
+            this.Type = "week";
+            let we = document.getElementById('week');
+            let mo = document.getElementById("month");
+            we.style.backgroundColor = "#0099CC";
+            mo.style.backgroundColor = "";
+
+            this.get_data()
+        }
+        function tjzq2() {
+            this.month = true;
+            this.week = false;
+            this.Type = "month";
+            let we = document.getElementById('week');
+            let mo = document.getElementById("month");
+            we.style.backgroundColor = "";
+            mo.style.backgroundColor = "#0099CC";
+
+            this.get_data()
+        }
+        function go_dp() {
+            window.location.replace("~/Views/jc/index.html")
+        }
+        function get_data() {
+            $.ajax({
+                url: "/LR_CodeDemo/ProjectContract/GetContract",
+                type: 'GET',
+                data: {
+
+                    queryJson: this.Type
+
+                },
+                success: function (res) {
+                    console.log(res)
+                    let tj = JSON.parse(res)
+                    console.log(tj)
+                    console.log(tj.data)
+                    if (tj.code == 200) {
+                        this.bumen = tj.data.DepartmentName
+                        this.jine = tj.data.ContractSum
+                        this.shul = tj.data.ProjectCount
+
+                        let cons = this.jine.map(x => (x / 10000).toFixed(2))
+                        //console.log(this.bumen)
+                        setTimeout(() => {
+                            console.log(this.bumen)
+                            //echartsChina()
+                            var myChart = echarts.init(document.getElementById('main'));
+                            //console.log(this.bumen)
+                            // 指定图表的配置项和数据
+
+                            var option = {
+                                color: ['#99CCCC', '#FFCC99'],
+                                title: {
+                                    text: '数据统计',
+                                    left: 'center',
+                                },
+                                tooltip: {},
+                                legend: {
+
+                                    data: [
+                                        {
+                                            name: '营销金额(万)',
+
+                                        },
+                                        {
+                                            name: '合同数量(个)'
+                                        }],
+                                    left: 'right',
+                                    //top:''
+                                },
+                                xAxis: {
+                                    type: 'value',
+                                    boundaryGap: [0, 0.01],
+                                    axisLine: {
+                                        show: true
+                                    },
+                                },
+                                yAxis: {
+                                    type: 'category',
+                                    inverse:true,//倒叙排列
+                                    data: this.bumen,
+                                    axisLine: {
+                                        show: true
+                                    },
+                                    axisTick: {
+                                        show: false
+                                    }
+                                },
+                                series: [
+                                    {
+                                        name: '营销金额(万)',
+                                        type: 'bar',
+                                        data: cons,
+                                        itemStyle: {
+                                            normal: {
+                                                label: {
+                                                    show: true,		// 开启显示
+                                                    distance: 20,     // 条柱之间的距离
+                                                    position: 'right',	// 在上方top在右侧right显示
+                                                    textStyle: {	    // 数值样式
+                                                        color: 'black',
+                                                        fontSize: 12
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    {
+                                        name: '合同数量(个)',
+                                        type: 'bar',
+                                        data: this.shul,
+                                        itemStyle: {
+                                            normal: {
+                                                label: {
+                                                    show: true,		// 开启显示
+                                                    distance: 20,     // 条柱之间的距离
+                                                    position: 'right',	// 在上方top在右侧right显示
+                                                    textStyle: {	    // 数值样式
+                                                        color: 'black',
+                                                        fontSize: 12
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                ]
+                            };
+
+                            // 使用刚指定的配置项和数据显示图表。
+                            myChart.setOption(option);
+                        }, 500)
+                    } else {
+                        alert(统计数据加载错误)
+                    }
+                }
+            })
+
+        }
+    </script>
+    @Html.AppendJsFile(        "/Views/LR_Content/plugin/resize/resize.js",
+        "/Views/LR_Content/plugin/mousewheel/mousewheel.js",
+        "/Views/LR_Content/plugin/scroll/scroll.js",
+        "/Views/LR_Content/plugin/gantt/lrGantt.js",
+        "/Views/Home/AdminDesktopTemp/index.js",
+         "/Areas/LR_CodeDemo/Views/GantProject/Gant.js",
+        "/Views/Home/echarts.min.js")
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

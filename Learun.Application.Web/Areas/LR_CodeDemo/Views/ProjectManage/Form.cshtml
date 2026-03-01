@@ -1,0 +1,73 @@
+﻿@{
+    ViewBag.Title = "项目管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+    <div class="col-xs-8 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">项目编号<font face="宋体">*</font></div>
+        <input id="ProjectCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    @*<div class="col-xs-4 lr-form-item" style="padding:0;">
+        <a id="lr-projectCode" class="btn btn-primary" style="margin-left:5px;"><span class="lrlg">自动生成项目编号</span></a>
+    </div>*@
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">项目名称<font face="宋体">*</font></div>
+        <input id="ProjectName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">委托单位<font face="宋体">*</font></div>
+        <input id="CustName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">联系人<font face="宋体">*</font></div>
+        <input id="ContactName" type="text" class="form-control" checkexpession="NotNull" isvalid="yes" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">联系电话<font face="宋体">*</font></div>
+        <input id="ContactPhone" type="text" class="form-control" checkexpession="NotNull" isvalid="yes" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">地址<font face="宋体">*</font></div>
+        <div id="area" class="col-xs-6 lr-form-area">
+            <div id="ProvinceId" placeholder="省" class="col-xs-4" checkexpession="NotNull" isvalid="yes"></div>
+            <div id="CityId" placeholder="市" class="col-xs-4" checkexpession="NotNull" isvalid="yes"></div>
+            <div id="CountyId" placeholder="县/区" class="col-xs-4"></div>
+        </div>
+        <div class="col-xs-6">
+            <input id="Address" type="text" placeholder="详细地址" class="form-control" />
+        </div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">项目来源<font face="宋体">*</font></div>
+        <div id="ProjectSource" checkexpession="NotNull" isvalid="yes"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">项目状况<font face="宋体">*</font></div>
+        <textarea id="ProjectSituation" class="form-control" style="height:50px;"></textarea>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">是否投标项目<font face="宋体">*</font></div>
+        <div id="TenderFlg"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">报备人<font face="宋体">*</font></div>
+        <div id="PreparedPerson" checkexpession="NotNull" isvalid="yes"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">营销人员<font face="宋体">*</font></div>
+        <div id="FollowPerson" checkexpession="NotNull" isvalid="yes"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">项目状态<font face="宋体">*</font></div>
+        <div id="ProjectStatus" checkexpession="NotNull" isvalid="yes"></div>
+    </div>
+    @*<div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">营销部门<font face="宋体">*</font></div>
+        <div id="DepartmentId" checkexpession="NotNull" isvalid="yes"></div>
+    </div>*@
+    <div class="col-xs-12 lr-form-item" data-table="Project">
+        <div class="lr-form-item-title">备注</div>
+        <textarea id="Remark" class="form-control" style="height:50px;"></textarea>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectManage/Form.js")

@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "评论信息";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<div id="app">
+    
+    @*<p class="title" v-if="rows!=null">评论信息</p>*@
+    <el-descriptions class="margin-top" :column="2" border v-if="rows!=null" v-for="(item,index) in rows">
+        <el-descriptions-item label-class-name="my-label" content-class-name="my-content1">
+            {{item.CreateTime}}
+            {{item.CreateUserName}}
+        </el-descriptions-item>
+        <el-descriptions-item label-class-name="my-label" content-class-name="my-content2">
+            <template slot="label">
+                <i class="el-icon-user"></i>
+                评论内容
+            </template>
+            {{item.CommentsName}}
+        </el-descriptions-item>        
+    </el-descriptions>
+
+</div>
+
+<script>
+    var processId = request('processId');
+   
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                visible: false,
+                //activities: [{
+                //    content: '盖章',
+                //    timestamp: ''
+                //}, {
+                //    content: '审核完成',
+                //    timestamp: ''
+                //}, {
+                //    content: '审核中',
+                //    timestamp: ''
+                //}, {
+                //    content: '提交审核',
+                //    timestamp: '2022-04-11'
+                //}],
+                rows: {},
+                rowss:[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,,1,1,1,11,,1,1,1,11,1,1,1,1,1,1,1,1,1,1,,1,1,1,1,1,1,,1,1,1,1,1,,1,1,1,1,11]
+                //Contract: {},
+                //Task: {},
+                //PayCollection: {},
+                //Billing: {},
+                //Payment: {}
+            }
+        },
+        mounted() {
+            this.getdata()
+        },
+        methods: {
+            getdata() {
+                $.ajax({
+                    url: top.$.rootUrl + '/LR_NewWorkFlow/NWFProcess/GetCommentsListByWorkFlowId?WorkFlowId=' + processId,
+                    type: 'GET',
+                    data: {},
+                    success: (res) => {
+                        console.log(res)
+                        let a = JSON.parse(res)                       
+                        this.rows = a.data.rows
+                       
+                        
+
+                    }
+                })
+            }
+        }
+    })
+</script>
+<style>
+    #app {
+        height:100%;
+        min-height:100px;
+        padding: 20px;
+        padding-top: 0;
+        overflow-y: auto;
+    }
+   /* .title{
+        font-size:20px;
+        font-weight:bold;
+        width:100%;
+        height:50px;
+        display:flex;
+        align-items:center;
+    }*/
+    .margin-top{
+        margin-top:5px;
+    }
+    .my-label {
+        width: 100px;
+    }
+    .my-content1{
+        width:300px;
+    }
+    .my-content2 {
+        width: 600px;
+    }
+</style>
+

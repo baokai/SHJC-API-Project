@@ -1,0 +1,30 @@
+﻿@{ ViewBag.Title = "批量审核页面";
+    Layout = "~/Views/Shared/_Form.cshtml"; }
+@Html.AppendCssFile("/Areas/LR_OrganizationModule/Views/User/MoreDepartmentIdAdd.css")
+
+<div class="lr-layout">
+    <div class="lr-layout-center">
+        <div class="lr-layout-wrap lr-layout-wrap-notitle">
+            <div class="lr-layout-tool">          
+                <div class="lr-layout-tool-right">
+                    
+                    <div class=" btn-group btn-group-sm">
+                        <a id="lr_refresh" class="btn btn-default"><i class="fa fa-refresh"></i></a>
+                    </div>
+                    <div class=" btn-group btn-group-sm">
+                        <a id="lr_List1" class="btn btn-circle"><i class="fa fa-yelp"></i>&nbsp;<span class="lrlg">清除多部门权限</span></a>
+                    </div>
+                    <div class=" btn-group btn-group-sm">
+                        <a id="lr_UserList" class="btn btn-circle"><i class="fa fa-yelp"></i>&nbsp;<span class="lrlg">添加多部门</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="lr-layout-body" id="gridtable">
+            </div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_OrganizationModule/Views/User/MoreDepartmentIdAdd.js")
+
+
+

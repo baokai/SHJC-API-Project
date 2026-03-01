@@ -1,0 +1,288 @@
+﻿@{
+    ViewBag.Title = "项目管理";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<div id="app">
+    <el-descriptions class="margin-top" title="项目信息" :column="3" :size="size" border>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-user"></i>
+                项目名称
+            </template>
+            {{datas.ProjectName}}
+
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-mobile-phone"></i>
+                委托单位
+            </template>
+            {{datas.CustName}}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-location-outline"></i>
+                项目来源
+            </template>
+            {{datas.ProjectSource}}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-tickets"></i>
+                营销部门
+            </template>
+            <el-tag size="small"> {{datas.DepartmentId}}</el-tag>
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                营销人员
+            </template>
+            {{datas.FollowPerson}}
+        </el-descriptions-item>
+    </el-descriptions>
+        <el-descriptions class="margin-top" title="合同信息" :column="4" border v-if="Contract!=null" v-for="(item,index) in Contract" >                        
+                <el-descriptions-item>
+                    <template slot="label">
+                        <i class="el-icon-user"></i>
+                        {{item.MasterContract}}合同分类
+                    </template>
+                    {{item.ContractType}}
+                </el-descriptions-item>
+                <el-descriptions-item>
+                    <template slot="label">
+                        <i class="el-icon-mobile-phone"></i>
+                        合同编号
+                    </template>
+                    {{item.ContractNo}}
+                </el-descriptions-item>
+                <el-descriptions-item>
+                    <template slot="label">
+                        <i class="el-icon-location-outline"></i>
+                        合同主体
+                    </template>
+                    {{item.ContractSubject}}
+                </el-descriptions-item>
+                <el-descriptions-item>
+                    <template slot="label">
+                        <i class="el-icon-tickets"></i>
+                        合同金额
+                    </template>
+                    <el-tag size="small">{{item.ContractAmount}}</el-tag>
+                </el-descriptions-item>
+                <el-descriptions-item>
+                    <template slot="label">
+                        <i class="el-icon-office-building"></i>
+                        备注
+                    </template>
+                    {{item.ContractRemark}}
+                </el-descriptions-item>      
+        </el-descriptions>
+   
+    <el-descriptions class="margin-top" title="任务信息" :column="4" v-if="Task!=null" border  v-for="(item,index) in Task">
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-user"></i>
+                现场负责人
+            </template>
+            {{item.SiteContact}}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-mobile-phone"></i>
+                现场联系电话
+            </template>
+            {{item.SitePhone}}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                备注
+            </template>
+            {{item.TaskRemark}}
+            
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                真实检测目的
+            </template>
+            {{item.TestTarget}}
+        </el-descriptions-item>
+
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-location-outline"></i>
+                项目负责人
+            </template>
+            {{item.ProjectResponsible}}
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-tickets"></i>
+                进场时间
+            </template>
+            <el-tag size="small">{{item.ApproachTime}}</el-tag>
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                报告计划时间
+            </template>
+            <el-tag size="small">{{item.PlanTime}}</el-tag>
+
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                检测内容
+            </template>
+            {{item.TestContent}}
+        </el-descriptions-item>
+
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-tickets"></i>
+                检测员
+            </template>
+            <el-tag size="small">{{item.Inspector}}</el-tag>
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                当前状态
+            </template>
+            <el-steps :active="item.TaskStatus" simple>
+                <el-step title="待进场" icon="el-icon-edit"></el-step>
+                <el-step title="实施中" icon="el-icon-upload"></el-step>
+                <el-step title="报告审核中" icon="el-icon-picture"></el-step>
+                <el-step title="报告待出具" icon="el-icon-picture"></el-step>
+                <el-step title="已完成" icon="el-icon-picture"></el-step>
+                <el-step title="已变更" icon="el-icon-picture"></el-step>
+                <el-step title="报告编制中" icon="el-icon-picture"></el-step>
+                <el-step title="离场" icon="el-icon-picture"></el-step>
+            </el-steps>
+        </el-descriptions-item>
+    </el-descriptions>
+    <el-descriptions class="margin-top" title="回款信息" :column="3" v-if="PayCollection!=null" border v-for="(item,index) in PayCollection">
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                到款时间
+            </template>
+            <el-tag size="small">{{item.ReceiptDate}}</el-tag>
+
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                到款金额
+            </template>
+            {{item.Amount}}
+        </el-descriptions-item>
+    </el-descriptions>
+    <el-descriptions class="margin-top" title="发票信息" :column="3" v-if="Billing!=null" border v-for="(item,index) in Billing">
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                创建时间
+            </template>
+            <el-tag size="small">{{item.CreateTime}}</el-tag>
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                开票金额
+            </template>
+            {{item.BillingAmount}}
+        </el-descriptions-item>
+    </el-descriptions>
+    <el-descriptions class="margin-top" title="付款信息" :column="3" v-if="Payment!=null" border v-for="(item,index) in Payment">
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                创建时间
+            </template>
+            <el-tag size="small">{{item.CreateTime}}</el-tag>
+        </el-descriptions-item>
+        <el-descriptions-item>
+            <template slot="label">
+                <i class="el-icon-office-building"></i>
+                支付金额
+            </template>
+            {{item.PaymentAmount}}
+        </el-descriptions-item>
+
+    </el-descriptions>
+</div>
+
+
+
+
+
+<script>
+    var keyValue = request('keyValue');
+    new Vue({
+        el: '#app',
+        data: function () {
+            return {
+                visible: false,
+                activities: [{
+                    content: '盖章',
+                    timestamp: ''
+                }, {
+                    content: '审核完成',
+                    timestamp: ''
+                }, {
+                    content: '审核中',
+                    timestamp: ''
+                }, {
+                    content: '提交审核',
+                    timestamp: '2022-04-11'
+                }],
+                datas: {},
+                Contract: {},
+                Task: {},
+                PayCollection: {},
+                Billing: {},
+                Payment: {}
+            }
+        },
+        mounted() {
+            this.getdata()
+        },
+        methods: {
+            getdata() {
+                $.ajax({
+                    url: top.$.rootUrl + '/LR_CodeDemo/ProjectManage/ToviewList?id=' + keyValue,
+                    type: 'GET',
+                    data: {},
+                    success: (res) => {
+                        console.log(res)
+                        let a = JSON.parse(res)
+                        this.datas = a.data.rows
+                        this.Contract = a.data.Contract
+                        this.Task = a.data.Task
+                        this.PayCollection = a.data.PayCollection
+                        this.Billing = a.data.Billing
+                        this.Payment = a.data.Payment
+                        
+                    }
+                })
+            }
+        }
+    })
+</script>
+<style>
+    #app {
+        padding: 20px;
+        padding-top: 0;
+        overflow-y: auto;
+    }
+</style>
+

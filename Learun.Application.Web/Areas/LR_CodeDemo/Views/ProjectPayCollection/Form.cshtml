@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "项目回款管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+    <div class="lr-form-wrap" id="form">
+        <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+            <div class="lr-form-item-title">项目名称<font face="宋体">*</font></div>
+            <div id="ProjectId" checkexpession="NotNull" isvalid="yes"></div>
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+            <div class="lr-form-item-title">委托单位<font face="宋体">*</font></div>
+            <input id="CustName" type="text" class="form-control" checkexpession="NotNull" isvalid="yes"  />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+            <div class="lr-form-item-title">合同编号</div>
+            <input id="ContractNo" type="text" class="form-control" checkexpession="NotNull" isvalid="yes" />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+            <div class="lr-form-item-title">本次到款金额<font face="宋体">*</font></div>
+            <input id="Amount" type="number" class="form-control" checkexpession="NotNull" isvalid="yes" />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+            <div class="lr-form-item-title">到账日期<font face="宋体">*</font></div>
+            <input id="ReceiptDate" autocomplete="off" type="text" class="form-control lr-input-wdatepicker" checkexpession="NotNull" isvalid="yes""  onfocus="WdatePicker({ dateFmt:'yyyy-MM-dd',onpicked: function () { $('#ReceiptDate').trigger('change'); } })" />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="ProjectPayCollection">
+            <div class="lr-form-item-title">到款单位<font face="宋体">*</font></div>
+            <input id="PaymentUnit" type="text"   class="form-control" checkexpession="NotNull" isvalid="yes" />
+        </div>
+    </div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectPayCollection/Form.js")

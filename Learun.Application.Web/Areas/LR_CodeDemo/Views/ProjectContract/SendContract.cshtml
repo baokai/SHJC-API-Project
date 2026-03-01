@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "项目合同申请";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">项目名称</div>
+        <div id="ProjectId"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">合同编号</div>
+        <input id="ContractNo" type="text" class="form-control" />
+    </div>
+    <div class="col-xs-8 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">归档编号</div>
+        <input id="ReceivedFlagNo" type="text" class="form-control" isvalid="yes" />
+    </div>
+    <div class="col-xs-4 lr-form-item" style="padding:0;">
+        <a id="lr-contract" class="btn btn-primary" style="margin-left:5px;"><span class="lrlg">自动生成归档编号</span></a>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">合同主体</div>
+        <div id="ContractSubject"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">合同金额</div>
+        <input id="ContractAmount" type="text" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">有效合同金额<font face="宋体">*</font></div>
+        <input id="EffectiveAmount" type="number" class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">合同分类</div>
+        <div id="ContractType"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">归档类型</div>
+        <div id="ReceiptType" checkexpession="NotNull" isvalid="yes"></div>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+        <div class="lr-form-item-title">备注</div>
+        <textarea id="Remark" class="form-control" style="height:50px;"></textarea>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectContract/SendContract.js")

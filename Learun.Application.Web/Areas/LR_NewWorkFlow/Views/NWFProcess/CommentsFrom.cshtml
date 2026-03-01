@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "流程评论";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+    <div class="col-xs-12 lr-form-item" data-table="Comments">
+        <div class="lr-form-item-title">评论<font face="宋体">*</font></div>
+        <textarea id="CommentsName" class="form-control" style="height:260px;" isvalid="yes" checkexpession="NotNull"></textarea>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_NewWorkFlow/Views/NWFProcess/CommentsFrom.js")

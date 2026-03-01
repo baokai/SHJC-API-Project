@@ -1,0 +1,44 @@
+﻿@{ ViewBag.Title = "营销报表";
+    Layout = "~/Views/Shared/_Index.cshtml"; }
+<div class="lr-layout ">
+    <div class="lr-layout-center">
+        <div class="lr-layout-wrap lr-layout-wrap-notitle ">
+            <div class="lr-layout-tool">
+                <div class="lr-layout-tool-left">               
+                    <div class="lr-layout-tool-item">
+                        <div id="multiple_condition_query">
+                            <div class="lr-query-formcontent">
+                                @*<div class="col-xs-6 lr-form-item" data-table="ProjectTask">
+                                    <div class="lr-form-item-title">年:格式(yyyy)</div>                                  
+                                </div>*@ 
+                                <div class="col-xs-12 lr-form-item" data-table="ProjectTask">
+                                    <div class="lr-form-item-title">年:yyyy</div>
+                                    <input id="YYYYTime" type="text" class="form-control" />
+                                </div> 
+                                <div class="col-xs-12 lr-form-item" data-table="ProjectContract">
+                                    <div class="lr-form-item-title">部门</div>
+                                    <div id="DepartmentId" checkexpession="NotNull" isvalid="yes"></div>
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lr-layout-tool-right">
+
+                    <div class=" btn-group btn-group-sm" learun-authorize="yes">
+                        <a id="lr-replace" class="btn btn-default"><i class="fa fa-refresh"></i>&nbsp;<span class="lrlg">刷新</span></a>
+                        <a id="lr-print" class="btn btn-default"><i class="fa fa-print"></i>&nbsp;<span class="lrlg">打印</span></a>
+                        <a id="lr-export" class="btn btn-default"><i class="fa fa-sign-out"></i>&nbsp;<span class="lrlg">导出</span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="lr-layout-body" id="gridtable"></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ReportForms/CapitalDepartmentIdList.js")
+

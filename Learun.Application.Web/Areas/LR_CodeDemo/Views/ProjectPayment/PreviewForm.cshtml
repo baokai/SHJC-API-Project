@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "项目付款";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+<div class="lr-form-wrap" id="form">
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">项目名称</div>
+        <input id="ProjectName" type="text" class="form-control" readonly />
+    </div>
+
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">付款类型  </div>
+        <input id="PayType" isvalid="yes" checkexpession="NotNull" class="form-control" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">收款单位名称</div>
+        <input id="Payee" type="text" class="form-control" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">收款银行</div>
+        <input id="PayeeBank" type="text" class="form-control" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">银行账号</div>
+        <input id="BankAccount" type="text" class="form-control" readonly>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">支付金额</div>
+        <input id="PaymentAmount" readonly class="form-control" />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+
+        <div class="lr-form-item-title">付款方式</div>
+        <input id="PaymentMethod" class="form-control" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">我司支付</div>
+        <input id="PaymentHeader" class="form-control" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">外付事由</div>
+        <textarea id="PaymentReason" class="form-control"  style="height:100px;"  readonly></textarea>
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">审批人</div>
+        <input id="Approver" type="text" class="form-control" checkexpession="NotNull" isvalid="yes" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">审批时间</div>
+        <input id="ApproverTime" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+    </div>
+    <div class="col-xs-12 lr-form-item" data-table="ProjectPayment">
+        <div class="lr-form-item-title">附件上传</div>
+        <div id="PaymentFile" isvalid="yes" checkexpession="NotNull"></div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectPayment/PreviewForm.js")

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "二维码生成";
+    Layout = "~/Views/Shared/_Index.cshtml";
+}
+<script type="text/javascript" src="~/Content/qrcode/qrcode.js"></script>
+<script type="text/javascript" src="~/Content/qrcode/jquery.min.js"></script>
+<script src="~/Content/jquery/plugin/jqprint/jquery.jqprint-0.3.js"></script>
+
+<div class="lr-layout ui-report" style="padding:0px;">
+    <div class="lr-layout-center" style="padding: 0px; width: 380px; height: 360px; margin: 10px 10px 0px 10px ">
+        <div class="lr-layout-wrap lr-layout-wrap-notitle" style="padding:80px 0px;">
+            <div id="qrcode" style="display:flex;justify-content:center;"></div>
+        </div>
+    </div>
+    <div style="box-shadow:0px 0px 1px #808080; padding: 5px 10px; display: flex; justify-content: flex-end; width: 380px; height: 45px; margin: 10px 10px 3px 10px;border-radius:5px;">
+        <div style="">
+            <div class="lr-layout-tool-item">
+                <input id="txt_code" type="hidden" value="http://114.215.185.6:82/#/pages/QrCode/QRcode" class="form-control" placeholder="请输入生成二维码关键字" />
+                <input id="txt_num" type="hidden" value="1" class="form-control" placeholder="请输入生成二维码数量" />
+                @*<a id="lr-ok" class="btn btn-primary btn-sm">&nbsp;<span class="lrlg">生成</span></a>*@
+                <a id="lr-print" class="btn btn-default"><i class="fa fa-print"></i>&nbsp;<span class="lrlg">打印</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectTask/CreateQRCode.js")

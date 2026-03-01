@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "项目管理";
+    Layout = "~/Views/Shared/_Form.cshtml";
+}
+
+<div class="lr-layout-body" >
+    <div class="lr-form-wrap" id="form">
+        <div class="col-xs-6 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">项目编号</div>
+            <input id="ProjectCode" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">项目名称</div>
+            <input id="ProjectName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">委托单位</div>
+            <input id="CustName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">地址</div>
+            <input id="ProvincesAndcities" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+        </div>
+        <div class="col-xs-6 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">联系人</div>
+            <input id="ContactName" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+        </div>
+        <div class="col-xs-6 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">联系电话</div>
+            <input id="ContactPhone" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">项目状况</div>
+            <textarea id="ProjectSituation" class="form-control" style="height:50px;" readonly></textarea>
+        </div>
+        <div class="col-xs-6 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">报备人</div>
+            <input id="PreparedPerson" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+        </div>
+        <div class="col-xs-6 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">营销人员</div>
+            <input id="FollowPerson" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">项目状态</div>
+            <input id="ProjectStatus" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">创建日期</div>
+            <input id="CreateTime" type="text" class="form-control lr-input-wdatepicker" checkexpession="NotNull" isvalid="yes" readonly />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">备注</div>
+            <textarea id="Remark" class="form-control" style="height:50px;"></textarea>
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">项目来源</div>
+            <input id="ProjectSource" type="text" class="form-control" isvalid="yes" checkexpession="NotNull" readonly />
+        </div>
+        <div class="col-xs-12 lr-form-item" data-table="Project">
+            <div class="lr-form-item-title">是否投标项目</div>
+            <input id="TenderFlg" checkexpession="NotNull" class="form-control" isvalid="yes" />
+        </div>
+       
+    </div>
+
+   @* <div style="position:absolute;bottom:0;left:0;border-top:1px solid #ccc;height:300px;width:100%;">
+        <div class="lr-form-tabs" id="lr_form_tabs">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-value="tab1"><span class="lrlg">合同信息</span></a></li>
+                <li><a data-value="tab2"><span class="lrlg">任务信息</span></a></li>
+                <li><a data-value="tab3"><span class="lrlg">用工信息</span></a></li>
+                <li><a data-value="tab4"><span class="lrlg">开票信息</span></a></li>
+                <li><a data-value="tab5"><span class="lrlg">回款信息</span></a></li>
+                <li><a data-value="tab6"><span class="lrlg">付款信息</span></a></li>
+            </ul>
+        </div>
+        <div class="lr-tab-content tab-content">
+            <div id="tab1" class="tab-pane active" style="padding:4px;">
+                <div id="contractTable" style="border:1px solid #ccc;"></div>
+            </div>
+            <div id="tab2" class="tab-pane">
+                <div id="taskTable" style="border:1px solid #ccc;"></div>
+            </div>
+            <div id="tab3" class="tab-pane">
+                <div id="recruitTable" style="border:1px solid #ccc;"></div>
+            </div>
+            <div id="tab4" class="tab-pane">
+                <div id="billingtable" style="border:1px solid #ccc;"></div>
+            </div>
+            <div id="tab5" class="tab-pane">
+                <div id="payCollectionTable" style="border:1px solid #ccc;"></div>
+            </div>
+            <div id="tab6" class="tab-pane">
+                <div id="paymentTable" style="border:1px solid #ccc;"></div>
+            </div>
+        </div>
+    </div>*@
+</div>
+
+
+@Html.AppendJsFile("/Areas/LR_CodeDemo/Views/ProjectManage/PreviewFormById.js")
